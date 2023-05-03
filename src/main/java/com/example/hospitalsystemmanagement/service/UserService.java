@@ -1,9 +1,9 @@
-package com.boots.service;
+package com.example.hospitalsystemmanagement.service;
 
-import com.boots.entity.Role;
-import com.boots.entity.User;
-import com.boots.repository.RoleRepository;
-import com.boots.repository.UserRepository;
+import com.example.hospitalsystemmanagement.repository.RoleRepository;
+import com.example.hospitalsystemmanagement.repository.UserRepository;
+import com.example.hospitalsystemmanagement.entity.Role;
+import com.example.hospitalsystemmanagement.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,6 +26,14 @@ public class UserService implements UserDetailsService {
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @PersistenceContext
     private EntityManager em;
+
+
+
+//    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder) {
+//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+//    }
+
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -61,9 +69,6 @@ public class UserService implements UserDetailsService {
         }
         user.setRole(role);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        System.out.println(role.getName());
         userRepository.save(user);
         return true;
     }
@@ -76,7 +81,7 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
-    public List<User> usergtList(Long idMin) {
+    public List<User> userGetList(Long idMin) {
         return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
                  .setParameter("paramId", idMin).getResultList();
     }

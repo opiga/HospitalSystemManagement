@@ -1,27 +1,53 @@
-//package com.example.hospitalsystemmanagement.entity;
+package com.example.hospitalsystemmanagement.entity;
+
+import javax.persistence.*;
+import lombok.*;
+
+
+/**
+ * Created by bonda on 13.04.2023 13:24
+ *
+ * @author bonda
+ */
+@Entity
+@Table(name = "appointments")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+public class Appointment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "procedures")
+    private String procedures;
+    @Column(name = "medications")
+    private String medications;
+    @Column(name = "operations")
+    private String operations;
+    @Column(name = "date")
+    private String date;
+    @Column(name = "status")
+    private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_Id_Appoint")
+    User patient;
 //
-//import jakarta.persistence.*;
-//import lombok.*;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nurse_Id")
+    private User nurse;
 //
-///**
-// * Created by bonda on 13.04.2023 13:24
-// *
-// * @author bonda
-// */
-//@Entity
-//@Table(name = "appointment")
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Getter
-//@Setter
-//public class Appointment {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name= "id")
-//    private Integer appointmentId;
-//    private String procedures;
-//    private String medications;
-//    private String operations;
-//
-//}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctor_Id_Appoint")
+    private User doctor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hospital_Card_Id")
+    private HospitalCard hospitalCard;
+
+}

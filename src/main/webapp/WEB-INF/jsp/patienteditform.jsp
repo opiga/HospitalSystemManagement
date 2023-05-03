@@ -10,7 +10,7 @@
         <%--@elvariable id="patient" type=""--%>
         <form:form action="${pageContext.request.contextPath}/patients/editsave" method="post"
                    modelAttribute="patient">
-            <form:hidden path="patientId"/>
+            <form:hidden path="id"/>
             <table>
                 <tr>
                     <td><form:label class="text-center"

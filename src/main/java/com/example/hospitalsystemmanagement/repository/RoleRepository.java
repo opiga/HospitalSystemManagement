@@ -1,7 +1,6 @@
-package com.boots.repository;
+package com.example.hospitalsystemmanagement.repository;
 
-
-import com.boots.entity.Role;
+import com.example.hospitalsystemmanagement.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {

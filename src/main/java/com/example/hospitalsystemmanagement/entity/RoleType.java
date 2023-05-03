@@ -1,7 +1,7 @@
-package com.boots.entity;
+package com.example.hospitalsystemmanagement.entity;
 
 public enum RoleType {
-    USER(1), ADMIN(2);
+    ADMIN(1), USER(2),NURSE(3),PATIENT(4),DOCTOR(5);
     private int roleId;
 
     RoleType(int roleId) {

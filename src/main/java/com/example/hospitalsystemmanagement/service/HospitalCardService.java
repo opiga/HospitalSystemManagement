@@ -1,9 +1,9 @@
 package com.example.hospitalsystemmanagement.service;
 
+import com.example.hospitalsystemmanagement.entity.HospitalCard;
 import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.repository.PatientWithHospitalCardAndDoctor;
 import com.example.hospitalsystemmanagement.repository.PatientWithNumberOpenedHospitalCards;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -12,15 +12,13 @@ import java.util.List;
  *
  * @author bonda
  */
-public interface PatientService {
-    public List<User> findAll();
+public interface HospitalCardService {
+    public List<HospitalCard> findAllByPatientId(Long id);
 
-    public User findById(Long theId);
+    public HospitalCard findById(Long theId);
 
-    public void save(User thePatient);
+    public void save(HospitalCard theHospitalCard);
 
     public void deleteById(Long theId);
 
-    public List<PatientWithHospitalCardAndDoctor> findAllWithHospitalCardsAndDoctors();
-    public List<PatientWithNumberOpenedHospitalCards> findAllWithNumberOpenedHospitalCards();
 }
