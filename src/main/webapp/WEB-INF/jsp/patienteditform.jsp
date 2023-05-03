@@ -11,35 +11,47 @@
         <form:form action="${pageContext.request.contextPath}/patients/editsave" method="post"
                    modelAttribute="patient">
             <form:hidden path="id"/>
+            <form:hidden path="role"/>
             <table>
                 <tr>
                     <td><form:label class="text-center"
                                     path="firstName">First Name:</form:label></td>
-                    <td><form:input class="form-control" path="firstName"/></td>
+                    <td><form:input class="form-control" path="firstName"
+                                    value="${patient.firstName}"/></td>
                 </tr>
                 <tr>
                     <td><form:label class="text-center" path="lastName">Last Name:</form:label></td>
-                    <td><form:input class="form-control" path="lastName"/></td>
+                    <td><form:input class="form-control" path="lastName"
+                                    value="${patient.lastName}"/></td>
                 </tr>
                 <tr>
                     <td><form:label class="text-center"
                                     path="dateOfBirth">Date of Birth:</form:label></td>
-                    <td><form:input class="form-control" path="dateOfBirth"/></td>
+                    <td><form:input class="form-control" path="dateOfBirth" type="date"
+                                    value="${patient.dateOfBirth}"/></td>
                 </tr>
                 <tr>
                     <td><form:label class="text-center" path="email">email:</form:label></td>
-                    <td><form:input class="form-control" path="email"/></td>
+                    <td><form:input class="form-control" path="email"
+                                    value="${patient.email}"/></td>
                 </tr>
                 <tr>
                     <td><form:label class="text-center"
-                                    path="phoneNumber">phoneNumber:</form:label></td>
-                    <td><form:input class="form-control" path="phoneNumber"/></td>
+                                    path="phoneNumber">PhoneNumber:</form:label></td>
+                    <td><form:input class="form-control" path="phoneNumber"
+                                    value="${patient.phoneNumber}"/></td>
+                </tr>
+                <tr>
+                    <td><form:label class="text-center"
+                                    path="address">Address:</form:label></td>
+                    <td><form:input class="form-control" path="address"
+                                    value="${patient.address}"/></td>
                 </tr>
             </table>
-
+            <input class="btn btn-secondary" type="submit" value="Save Changes"/>
         </form:form>
         <br>
-        <input class="btn btn-secondary" type="submit" value="Save Changes"/>
+
 
     </div>
 </div>

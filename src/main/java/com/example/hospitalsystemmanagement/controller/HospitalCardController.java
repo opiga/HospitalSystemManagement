@@ -13,6 +13,7 @@ import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.service.CategoryService;
 import com.example.hospitalsystemmanagement.service.DoctorService;
 import com.example.hospitalsystemmanagement.service.HospitalCardService;
+import com.example.hospitalsystemmanagement.service.PatientService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,12 +32,15 @@ public class HospitalCardController {
     private HospitalCardService hospitalCardService;
     private CategoryService categoryService;
     private DoctorService doctorService;
+    private PatientService patientService;
 
     public HospitalCardController(HospitalCardService theHospitalCardService,
-                                  CategoryService theCategoryService, DoctorService theDoctorService) {
+                                  CategoryService theCategoryService, DoctorService theDoctorService
+                                 , PatientService thePatientService) {
         hospitalCardService = theHospitalCardService;
         categoryService = theCategoryService;
         doctorService = theDoctorService;
+        patientService=thePatientService;
     }
 
     @RequestMapping("/")
@@ -47,7 +51,6 @@ public class HospitalCardController {
 
     @GetMapping("/list/{id}")
     public String listHospitalCards(@PathVariable("id") Long patientId, Model theModel) {
-        System.out.println(")))))))))))))))))))))");
         List<HospitalCard> theHospitalCards = hospitalCardService.findAllByPatientId(patientId);
         theModel.addAttribute("hospitalCards", theHospitalCards);
         theModel.addAttribute("hospitalCardPatient", theHospitalCards.get(0).getPatient());
@@ -58,18 +61,24 @@ public class HospitalCardController {
     }
 
 
-    //    @GetMapping("/addpatient")
-//    public String showAddPatientForm(Model model) {
-//        model.addAttribute("patient", new User());
-//        return "patientform";
-//    }
-//
-//    @PostMapping("/addpatientu")
-//    public String addPatient(@ModelAttribute("patient") User patient) {
-//        patientService.save(patient);
-//        return "redirect:/patients/list";
-//    }
-//
+    @GetMapping("/addhospitalcard/{id}")
+    public String showAddHospitalCardForm(@PathVariable("id") Long patientId,Model model) {
+        HospitalCard newHospitalCard=new HospitalCard();
+        newHospitalCard.setPatient(patientService.findById(patientId));
+        model.addAttribute("newHospitalCard", newHospitalCard);
+        List<User> doctors = doctorService.findAll();
+        model.addAttribute("doctors", doctors);
+        return "hospitalCardForm";
+    }
+
+    @PostMapping("/addNewHospitalCard")
+    public String addHospitalCard(@ModelAttribute("newHospitalCard") HospitalCard hospitalCard) {
+        User findDoctor = doctorService.findById(hospitalCard.getDoctor().getId());
+        hospitalCard.setDoctor(findDoctor);
+        hospitalCardService.save(hospitalCard);
+        return "redirect:/hospitalcards/list/" + hospitalCard.getPatient().getId();
+    }
+
     @RequestMapping(value = "/edit/{id}")
     public String edit(@PathVariable("id") Long hospitalCardId, Model theModel) {
         HospitalCard hospitalCard = hospitalCardService.findById(hospitalCardId);
@@ -84,7 +93,7 @@ public class HospitalCardController {
 
     @PostMapping(value = "/editsave")
     public String editHospitalCard(@ModelAttribute("editedHospitalCard")
-    HospitalCard hospitalCard) {
+                                   HospitalCard hospitalCard) {
         User findDoctor = doctorService.findById(hospitalCard.getDoctor().getId());
         hospitalCard.setDoctor(findDoctor);
         hospitalCardService.save(hospitalCard);

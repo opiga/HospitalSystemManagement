@@ -55,8 +55,7 @@ public class PatientController {
         return "redirect:/patients/list";
     }
 
-    //edit patient from patient list
-    @RequestMapping(value = "/editpatient/{id}")
+    @GetMapping(value = "/editpatient/{id}")
     public String edit(@PathVariable("id") Long patientId, Model m) {
         User patient = patientService.findById(patientId);
         m.addAttribute("patient", patient);
@@ -69,10 +68,10 @@ public class PatientController {
         return "redirect:/patients/list";
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable Long patientId) {
-        patientService.deleteById(patientId);
-        return "redirect:/patients/list";
-    }
+//    @GetMapping(value = "/delete/{id}")
+//    public String delete(@PathVariable Long id) {
+//        patientService.deleteById(id);
+//        return "redirect:/patients/list";
+//    }
 
 }

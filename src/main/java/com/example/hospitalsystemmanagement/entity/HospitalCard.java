@@ -1,8 +1,8 @@
 package com.example.hospitalsystemmanagement.entity;
 
-import javax.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -20,11 +20,16 @@ import java.util.List;
 public class HospitalCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "id")
+    @Column(name = "id")
     private Long hospitalCardId;
-    @Column(name= "diagnosis")
-    private String diagnosis;
-    @Column(name= "discharged",insertable=false, updatable = false, nullable = false,columnDefinition = "VARCHAR(45) default 'false'")
+    @Column(name = "preliminary_diagnosis")
+    private String preliminaryDiagnosis;
+    @Column(name = "clinical_diagnosis")
+    private String clinicalDiagnosis;
+    @Column(name = "final_diagnosis")
+    private String finalDiagnosis;
+
+    @Column(name = "discharged", nullable = false, columnDefinition = "VARCHAR(45) default 'false'")
     private String discharged;
 
     @ManyToOne(fetch = FetchType.LAZY)

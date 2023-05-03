@@ -19,37 +19,33 @@
            id=example>
         <thead>
         <tr>
-            <th class="text-center">id
-            <th class="text-center">diagnosis
+<%--            <th class="text-center">id--%>
+            <th class="text-center">preliminary Diagnosis
+            <th class="text-center">clinical Diagnosis
+            <th class="text-center">final Diagnosis
             <th class="text-center">discharged
             <th class="text-center">doctor
             <th class="text-center">doctor category
             <th class="text-center">Actions
-                <%--        <tfoot>--%>
-                <%--        <tr>--%>
-                <%--            <th class="text-center">id--%>
-                <%--            <th class="text-center">diagnosis--%>
-                <%--            <th class="text-center">discharged--%>
-                <%--            <th class="text-center">doctor--%>
-                <%--            <th class="text-center">Actions--%>
         <tbody>
         <c:forEach var="hospitalCard" items="${hospitalCards}">
         <tr>
-            <td>${hospitalCard.hospitalCardId}
-            <td>${hospitalCard.diagnosis}
+<%--            <td>${hospitalCard.hospitalCardId}--%>
+            <td>${hospitalCard.preliminaryDiagnosis}
+            <td>${hospitalCard.clinicalDiagnosis}
+            <td>${hospitalCard.finalDiagnosis}
             <td>${hospitalCard.discharged}
             <td>${hospitalCard.doctor.firstName} ${hospitalCard.doctor.lastName}
             <td>${hospitalCard.doctor.category.nameCategory}
             <td class="text-center">
-            <a class="btn btn-secondary"
-                                       href="${pageContext.request.contextPath}/hospitalcards/edit/${hospitalCard.hospitalCardId}">Edit</a>
+            <a class="btn btn-light"
+               href="${pageContext.request.contextPath}/hospitalcards/edit/${hospitalCard.hospitalCardId}">Edit</a>
             </c:forEach>
     </table>
 
     <br>
-    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/patients/addpatient">Add
-        new
-        patient</a>
+    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/hospitalcards/addhospitalcard/${hospitalCardPatient.id}">Add
+        new hospital card</a>
 </div>
 <br>
 <br>

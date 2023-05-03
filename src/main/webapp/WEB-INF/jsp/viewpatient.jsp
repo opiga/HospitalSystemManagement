@@ -20,16 +20,6 @@
             <th class="text-center">address
                 <%--            <th class="text-center">Opened Cards--%>
             <th class="text-center">Actions
-        <tfoot>
-        <tr>
-            <th class="text-center">firstName
-            <th class="text-center">lastName
-            <th class="text-center">dateOfBirth
-            <th class="text-center">email
-            <th class="text-center">phoneNumber
-            <th class="text-center">address
-                <%--            <th class="text-center">Opened Cards--%>
-            <th class="text-center">Actions
 
         <tbody>
         <c:forEach var="patient" items="${patients}">
@@ -41,19 +31,16 @@
             <td>${patient.phone_Number}
             <td>${patient.address}
                     <%--            <td>${patient.number_Of_Hospital_Cards}--%>
-            <td class="text-center"><a class="btn btn-secondary"
+            <td class="text-center"><a class="btn btn-light"
                                        href="${pageContext.request.contextPath}/patients/editpatient/${patient.id}">Edit</a>
-                <a class="btn btn-secondary"
-                   href="${pageContext.request.contextPath}/patients/delete/${patient.id}">Delete</a>
 
                 <c:if test="${patient.number_Of_Hospital_Cards == 0}">
-                <a class="btn btn-secondary"
-                   href="${pageContext.request.contextPath}/hospitalcards/addcard/${patient.id}">
-                    Add Card
-                </a>
+                <a class="btn btn-light"
+                   href="${pageContext.request.contextPath}/hospitalcards/addhospitalcard/${patient.id}">
+                    Add New Hospital Card</a>
                 </c:if>
                 <c:if test="${patient.number_Of_Hospital_Cards > 0}">
-                <a class="btn btn-secondary"
+                <a class="btn btn-light"
                    href="${pageContext.request.contextPath}/hospitalcards/list/${patient.id}">
                     Open Cards
                 </a>

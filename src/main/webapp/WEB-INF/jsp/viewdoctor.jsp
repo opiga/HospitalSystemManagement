@@ -13,18 +13,8 @@
         <thead>
         <tr>
 
-            <th class="text-center">id
+<%--            <th class="text-center">id--%>
             <th class="text-center">firstName
-            <th class="text-center">lastName
-            <th class="text-center">email
-            <th class="text-center">phoneNumber
-            <th class="text-center">category
-            <th class="text-center">number of Patients
-            <th class="text-center">Actions
-        <tfoot>
-        <tr>
-
-            <th class="text-center">id
             <th class="text-center">lastName
             <th class="text-center">email
             <th class="text-center">phoneNumber
@@ -34,7 +24,7 @@
         <tbody>
         <c:forEach var="doctor" items="${doctors}">
         <tr>
-            <td>${doctor.id}</td>
+<%--            <td>${doctor.id}</td>--%>
             <td>${doctor.first_Name}</td>
             <td>${doctor.last_Name}</td>
             <td>${doctor.email}</td>
@@ -42,9 +32,9 @@
             <td>${doctor.name_Category}</td>
             <td>${doctor.number_Of_Patients}</td>
 
-        <td><a class="btn btn-secondary"
+        <td><a class="btn btn-light"
                href="${pageContext.request.contextPath}/doctors/editdoctor/${doctor.id}">Edit</a>
-            <a class="btn btn-secondary"
+            <a class="btn btn-light"
                href="${pageContext.request.contextPath}/doctors/delete/${doctor.id}">Delete</a>
             </c:forEach>
 

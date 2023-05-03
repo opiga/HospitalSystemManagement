@@ -18,9 +18,21 @@
                 </tr>
                 <tr>
                     <td><form:label class="text-center"
-                                    path="diagnosis">Diagnosis:</form:label></td>
-                    <td><form:input class="form-control" path="diagnosis"
-                                    value="${editedHospitalCard.diagnosis}"/></td>
+                                    path="preliminaryDiagnosis">Diagnosis:</form:label></td>
+                    <td><form:input class="form-control" path="preliminaryDiagnosis"
+                                    value="${editedHospitalCard.preliminaryDiagnosis}"/></td>
+                </tr>
+                <tr>
+                    <td><form:label class="text-center"
+                                    path="clinicalDiagnosis">Diagnosis:</form:label></td>
+                    <td><form:input class="form-control" path="clinicalDiagnosis"
+                                    value="${editedHospitalCard.clinicalDiagnosis}"/></td>
+                </tr>
+                <tr>
+                    <td><form:label class="text-center"
+                                    path="finalDiagnosis">Diagnosis:</form:label></td>
+                    <td><form:input class="form-control" path="finalDiagnosis"
+                                    value="${editedHospitalCard.finalDiagnosis}"/></td>
                 </tr>
                 <tr>
                     <td><form:label class="text-center" path="discharged">Discharged:</form:label></td>

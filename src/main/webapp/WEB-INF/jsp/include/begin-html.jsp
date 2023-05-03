@@ -22,7 +22,7 @@
                                         class="nav-link">Patients</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/doctors/list"
                                         class="nav-link">Doctors</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Appointment</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Appointments</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Contacts</a></li>
             </ul>
 <%--            <ul class="nav navbar-nav flex-row justify-content-between ml-auto">--%>
