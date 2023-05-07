@@ -22,7 +22,7 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Column(name = "procedures")
     private String procedures;
     @Column(name = "medications")
@@ -31,7 +31,7 @@ public class Appointment {
     private String operations;
     @Column(name = "date")
     private String date;
-    @Column(name = "status")
+    @Column(name = "status", nullable = false, columnDefinition = "VARCHAR(255) default 'appointed'")
     private String status;
 
     @ManyToOne

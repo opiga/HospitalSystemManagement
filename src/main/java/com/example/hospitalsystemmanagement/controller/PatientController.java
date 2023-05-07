@@ -9,9 +9,9 @@ package com.example.hospitalsystemmanagement.controller;
 
 
 import com.example.hospitalsystemmanagement.entity.User;
-import com.example.hospitalsystemmanagement.repository.PatientWithHospitalCardAndDoctor;
 import com.example.hospitalsystemmanagement.repository.PatientWithNumberOpenedHospitalCards;
 import com.example.hospitalsystemmanagement.service.PatientService;
+import com.example.hospitalsystemmanagement.service.RoleService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,10 +26,13 @@ import java.util.List;
 public class PatientController {
 
     private PatientService patientService;
+    private RoleService roleService;
 
-    public PatientController(PatientService thePatientService) {
+    public PatientController(PatientService thePatientService, RoleService theRoleService) {
         patientService = thePatientService;
+        roleService = theRoleService;
     }
+
     @RequestMapping("/")
     public String home(Model m) {
         return "index";
@@ -51,6 +54,7 @@ public class PatientController {
 
     @PostMapping("/addpatientu")
     public String addPatient(@ModelAttribute("patient") User patient) {
+        patient.setRole(roleService.findByName("patient"));
         patientService.save(patient);
         return "redirect:/patients/list";
     }

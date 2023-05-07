@@ -33,6 +33,11 @@
             <td><form:input path="phoneNumber" class="form-control"/></td>
         </tr>
         <tr>
+
+            <td><form:label class="text-center" path="address">Address:</form:label></td>
+            <td><form:input path="address" class="form-control"/></td>
+        </tr>
+        <tr>
             <td> </td>
             <td><input class="btn btn-secondary" type="submit" value="Save" /></td>
         </tr>

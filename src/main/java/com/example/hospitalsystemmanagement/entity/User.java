@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -32,7 +33,7 @@ public class User implements UserDetails {
     private String firstName;
     @Column(name = "last_Name")
     private String lastName;
-
+    private String fullName;
     @Column(name = "date_Of_Birth")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
@@ -127,5 +128,15 @@ public class User implements UserDetails {
     {
         return firstName+"  "+lastName;
     };
+
+    public void setPassword(String password) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
+    }
+
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 }
 

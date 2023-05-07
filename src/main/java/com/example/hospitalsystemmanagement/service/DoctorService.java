@@ -15,6 +15,8 @@ public interface DoctorService {
 
     public List<User> findAll();
 
+    public List<User> findAllNurses();
+
     public List<DoctorWithUsers> findAllWithPatients();
 
     public User findById(Long theId);

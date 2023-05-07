@@ -28,6 +28,12 @@ public class DoctorServiceImpl implements DoctorService {
         return doctorRepository.findAll();
     }
 
+
+    @Override
+    public List<User> findAllNurses() {
+        return doctorRepository.findAllNurses();
+    }
+
     @Override
     public List<DoctorWithUsers> findAllWithPatients() {
         return doctorRepository.findAllWithPatients();

@@ -11,6 +11,8 @@ import java.util.List;
  * @author bonda
  */
 public interface RoleService {
+
+    public Role findByName(String roleName);
     public List<Role> findAll();
 
     public Role findById(Long theId);

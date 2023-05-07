@@ -1,11 +1,7 @@
 package com.example.hospitalsystemmanagement.service;
 
 import com.example.hospitalsystemmanagement.entity.HospitalCard;
-import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.repository.HospitalCardRepository;
-import com.example.hospitalsystemmanagement.repository.PatientRepository;
-import com.example.hospitalsystemmanagement.repository.PatientWithHospitalCardAndDoctor;
-import com.example.hospitalsystemmanagement.repository.PatientWithNumberOpenedHospitalCards;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,16 +24,21 @@ public class HospitalCardServiceImpl implements HospitalCardService {
     }
 
     @Override
-    public  List<HospitalCard>  findAllByPatientId(Long id) {
+    public List<HospitalCard> findAllByPatientId(Long id) {
         return hospitalCardRepository.findAllByPatientId(id);
+    }
+
+    @Override
+    public List<HospitalCard> findAllByDoctorId(Long id) {
+        return hospitalCardRepository.findAllByDoctorId(id);
     }
 
     @Override
     public HospitalCard findById(Long theId) {
         Optional<HospitalCard> result = hospitalCardRepository.findById(theId);
         HospitalCard theHospitalCard = null;
-         if (result.isPresent()) {
-             theHospitalCard = result.get();
+        if (result.isPresent()) {
+            theHospitalCard = result.get();
         }
         else {
             throw new RuntimeException("Did not find HospitalCard id - " + theId);

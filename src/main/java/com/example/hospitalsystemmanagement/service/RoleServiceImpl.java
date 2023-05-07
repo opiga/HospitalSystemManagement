@@ -49,4 +49,9 @@ public class RoleServiceImpl implements RoleService {
     public void deleteById(Long theId) {
         roleRepository.deleteById(theId);
     }
+
+    @Override
+    public Role findByName(String roleName) {
+        return roleRepository.findByName(roleName);
+    }
 }

@@ -11,4 +11,7 @@ public interface HospitalCardRepository extends JpaRepository<HospitalCard, Long
     @Query(value = "SELECT * FROM hospitalcards as h where h.patient_Id=?", nativeQuery = true)
     public List<HospitalCard> findAllByPatientId(Long id);
 
+    @Query(value = "SELECT * FROM hospitalcards as h where h.doctor_Id=?", nativeQuery = true)
+    public List<HospitalCard> findAllByDoctorId(Long id);
+
 }
