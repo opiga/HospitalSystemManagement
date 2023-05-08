@@ -43,10 +43,10 @@
 
             <div class="form-group col-md-6">
                 <form:label class="text-center" path="nurse">Nurse:</form:label>
-                <form:select class="form-control" path="nurse.id">
+                <form:select class="form-control" path="nurse">
                     <form:option value="" label="Choose a nurse" disabled="false"/>
                     <form:options items="${nurses}" itemValue="id"
-                                  itemLabel="lastName"/>
+                                  itemLabel="fullName"/>
                 </form:select>
             </div>
             </div>

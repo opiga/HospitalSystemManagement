@@ -8,7 +8,7 @@
     <h1 class="mb-2">Appointments</h1>
 </div>
 <div class=container>
-    <table class="table table-bordered table-hover table-inverse table-striped"
+    <table class="table table-responsive table-bordered table-hover table-inverse table-striped"
            id=example>
         <thead>
         <tr>
@@ -32,7 +32,7 @@
             <td>${appointment.operations}
             <td>${appointment.date}
             <td>${appointment.status}
-            <td>${appointment.nurse.firstName} ${appointment.doctor.lastName}
+            <td>${appointment.nurse.firstName} ${appointment.nurse.lastName}
             <td>${appointment.doctor.firstName} ${appointment.doctor.lastName}, ${appointment.doctor.category.nameCategory}
                     <%--            <td>${patient.number_Of_Hospital_Cards}--%>
             <td class="text-center">
@@ -57,6 +57,7 @@
     </table>
     <br>
     <a class="btn btn-secondary" href="${pageContext.request.contextPath}/appointments/list">Return to Hospital Cards</a>
+<%--    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/appointments/list">Make appointment</a>--%>
 </div>
 <br>
 <br>

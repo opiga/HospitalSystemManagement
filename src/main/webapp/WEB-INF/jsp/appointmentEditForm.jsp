@@ -8,7 +8,7 @@
 <div class="container">
     <%--<jsp:useBean id="editedDoctor" scope="request" type="com.sun.org.apache.xml.internal.security.signature.SignatureProperty"/>--%>
     <%--@elvariable id="editedAppointment" type=""--%>
-    <form:form action="${pageContext.request.contextPath}/appointments/editsave/${editedDoctor.id}"
+    <form:form action="${pageContext.request.contextPath}/appointments/editsave"
                method="post"
                modelAttribute="editedAppointment">
         <div class="form-row">

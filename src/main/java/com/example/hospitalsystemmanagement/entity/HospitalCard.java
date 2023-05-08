@@ -40,6 +40,10 @@ public class HospitalCard {
     @JoinColumn(name = "patient_Id")
     private User patient;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nurse_Id")
+    private User nurse;
+
     @OneToMany(mappedBy = "hospitalCard", fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

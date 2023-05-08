@@ -41,7 +41,6 @@ public class AppointmentController {
 
     @GetMapping("/list")
     public String getHospitalCardsForCurrentUser(@AuthenticationPrincipal User currentUser, Model theModel) {
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
         List<HospitalCard> theHospitalCards = hospitalCardService.findAllByDoctorId(currentUser.getId());
         theModel.addAttribute("hospitalCards", theHospitalCards);
         theModel.addAttribute("doctor", currentUser);
@@ -87,18 +86,9 @@ public class AppointmentController {
         return "appointmentEditForm";
     }
 
-    @PostMapping("/editsave/{id}")
-    public String editAppointment(@PathVariable("id") Long id, @ModelAttribute("editedAppointment") Appointment appointment) {
+    @PostMapping("/editsave")
+    public String editAppointment(@ModelAttribute("editedAppointment") Appointment appointment) {
         appointmentService.save(appointment);
         return "redirect:/appointments/list";
     }
-
-
-
-
-
-
-
-
-
 }

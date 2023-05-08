@@ -10,7 +10,7 @@
     <h1 class="mb-2">Hospital cards
         <br>
         ${hospitalCardPatient.firstName} ${hospitalCardPatient.lastName}
-       is ${age} years old
+        is ${age} years old
     </h1>
 </div>
 <div class=container>
@@ -19,32 +19,35 @@
            id=example>
         <thead>
         <tr>
-<%--            <th class="text-center">id--%>
+            <%--            <th class="text-center">id--%>
             <th class="text-center">preliminary Diagnosis
             <th class="text-center">clinical Diagnosis
             <th class="text-center">final Diagnosis
             <th class="text-center">discharged
             <th class="text-center">doctor
             <th class="text-center">doctor category
+            <th class="text-center">nurse
             <th class="text-center">Actions
         <tbody>
         <c:forEach var="hospitalCard" items="${hospitalCards}">
         <tr>
-<%--            <td>${hospitalCard.hospitalCardId}--%>
+                <%--            <td>${hospitalCard.hospitalCardId}--%>
             <td>${hospitalCard.preliminaryDiagnosis}
             <td>${hospitalCard.clinicalDiagnosis}
             <td>${hospitalCard.finalDiagnosis}
             <td>${hospitalCard.discharged}
             <td>${hospitalCard.doctor.firstName} ${hospitalCard.doctor.lastName}
             <td>${hospitalCard.doctor.category.nameCategory}
+            <td>${hospitalCard.nurse.firstName} ${hospitalCard.nurse.lastName}
             <td class="text-center">
-            <a class="btn btn-light"
-               href="${pageContext.request.contextPath}/hospitalcards/edit/${hospitalCard.hospitalCardId}">Edit</a>
-            </c:forEach>
+                <a class="btn btn-light"
+                   href="${pageContext.request.contextPath}/hospitalcards/edit/${hospitalCard.hospitalCardId}">Edit</a>
+                </c:forEach>
     </table>
 
     <br>
-    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/hospitalcards/addhospitalcard/${hospitalCardPatient.id}">Add
+    <a class="btn btn-secondary"
+       href="${pageContext.request.contextPath}/hospitalcards/addhospitalcard/${hospitalCardPatient.id}">Add
         new hospital card</a>
 </div>
 <br>

@@ -5,44 +5,46 @@
     <h1 class="mb-2">Add New Patient</h1>
 </div>
 <div class="container">
-    <div class = "table-wrapper">
-<%--@elvariable id="patient" type=""--%>
-<form:form action="${pageContext.request.contextPath}/patients/addpatientu" method="post" modelAttribute="patient">
-    <table >
-        <tr>
-            <td><form:label class="text-center" path="firstName">First Name:</form:label></td>
-            <td><form:input path="firstName" class="form-control"/></td>
-        </tr>
-        <tr>
-            <td><form:label class="text-center" path="lastName">Last Name:</form:label></td>
-            <td><form:input path="lastName" class="form-control"/></td>
-        </tr>
-        <tr>
 
-            <td><form:label class="text-center" path="dateOfBirth">Date of Birth:</form:label></td>
-            <td><form:input path="dateOfBirth" type="date" class="form-control"/></td>
-        </tr>
-        <tr>
+        <%--@elvariable id="patient" type=""--%>
+        <form:form action="${pageContext.request.contextPath}/patients/addpatientu" method="post" modelAttribute="patient">
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <form:label class="text-center" path="firstName">First Name:</form:label>
+                <form:input path="firstName" class="form-control"/>
+            </div>
+        </div>
 
-            <td><form:label class="text-center" path="email">Email:</form:label></td>
-            <td><form:input path="email" class="form-control"/></td>
-        </tr>
-        <tr>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <form:label class="text-center" path="lastName">Last Name:</form:label>
+                <form:input path="lastName" class="form-control"/>
+            </div>
+            <div class="form-group col-md-4">
+                <form:label class="text-center" path="dateOfBirth">Date of Birth:</form:label>
+                    <form:input path="dateOfBirth" type="date" class="form-control"/>
+            </div>
+            <div class="form-group col-md-8">
+                <form:label class="text-center" path="email">Email:</form:label>
+                <form:input path="email" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <form:label class="text-center" path="phoneNumber">phoneNumber:</form:label>
+                <form:input path="phoneNumber" class="form-control"/>
+            </div>
 
-            <td><form:label class="text-center" path="phoneNumber">phoneNumber:</form:label></td>
-            <td><form:input path="phoneNumber" class="form-control"/></td>
-        </tr>
-        <tr>
+            <div class="form-group col-md-6">
+               <form:label class="text-center" path="address">Address:</form:label>
+                <form:input path="address" class="form-control"/>
+            </div>
+        </div>
 
-            <td><form:label class="text-center" path="address">Address:</form:label></td>
-            <td><form:input path="address" class="form-control"/></td>
-        </tr>
-        <tr>
-            <td> </td>
-            <td><input class="btn btn-secondary" type="submit" value="Save" /></td>
-        </tr>
-    </table>
-</form:form>
-    </div>
-    </div>
+        <button type="submit" class="btn btn-secondary" value="Save">Save
+        </button>
+    </form:form>
+
+</div>
+
 <%@ include file="include/end-html.jsp" %>

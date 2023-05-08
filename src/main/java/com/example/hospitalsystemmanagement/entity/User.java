@@ -1,6 +1,7 @@
 package com.example.hospitalsystemmanagement.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -29,18 +31,26 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "first_Name")
+    @NotNull
     private String firstName;
+    @NotNull
     @Column(name = "last_Name")
     private String lastName;
+
     private String fullName;
+    @NotNull
     @Column(name = "date_Of_Birth")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "phone_Number")
     private String phoneNumber;
+
     @Column(name = "address")
     private String address;
 
@@ -53,37 +63,44 @@ public class User implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "category_Id", referencedColumnName = "id")
     private Category category;
+
+
     @ManyToOne
     @JoinColumn(name = "role_Id", referencedColumnName = "id")
     private Role role;
 
 
-
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<Appointment> patientAppointments;
 
 
     @OneToMany(mappedBy = "nurse", fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<Appointment> nurseAppointments;
 
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<Appointment> doctorAppointments;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<HospitalCard> patientHospitalCards;
 
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<HospitalCard> doctorHospitalCards;
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -129,10 +146,10 @@ public class User implements UserDetails {
         return firstName+"  "+lastName;
     };
 
-    public void setPassword(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.password = passwordEncoder.encode(password);
-    }
+//    public void setPassword(String password) {
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        this.password = passwordEncoder.encode(password);
+//    }
 
 
     public String getFullName() {

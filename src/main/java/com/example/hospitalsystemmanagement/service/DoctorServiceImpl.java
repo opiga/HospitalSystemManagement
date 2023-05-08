@@ -1,9 +1,11 @@
 package com.example.hospitalsystemmanagement.service;
 
+import com.example.hospitalsystemmanagement.entity.Role;
 import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.repository.DoctorRepository;
 import com.example.hospitalsystemmanagement.repository.DoctorWithUsers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,8 @@ import java.util.Optional;
 @Service
 public class DoctorServiceImpl implements DoctorService {
     private DoctorRepository doctorRepository;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public DoctorServiceImpl(DoctorRepository theDoctorRepository) {
@@ -56,8 +60,10 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void save(User theDoctor) {
+        theDoctor.setPassword(bCryptPasswordEncoder.encode(theDoctor.getPassword()));
         doctorRepository.save(theDoctor);
     }
+
 
     @Override
     public void deleteById(Long theId) {

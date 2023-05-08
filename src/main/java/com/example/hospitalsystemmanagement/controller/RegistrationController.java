@@ -29,11 +29,14 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
-
+        System.out.println("!!!!!!!!!!!!!!");
         if (bindingResult.hasErrors()) {
             return "registration";
         }
+
+
         if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
+            System.out.println("########################");
             model.addAttribute("passwordError", "Password mismatch");
             return "registration";
         }

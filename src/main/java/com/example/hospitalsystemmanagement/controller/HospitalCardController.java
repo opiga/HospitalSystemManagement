@@ -68,6 +68,8 @@ public class HospitalCardController {
         model.addAttribute("newHospitalCard", newHospitalCard);
         List<User> doctors = doctorService.findAll();
         model.addAttribute("doctors", doctors);
+        List<User> nurses = doctorService.findAllNurses();
+        model.addAttribute("nurses", nurses);
         return "hospitalCardForm";
     }
 
@@ -88,6 +90,8 @@ public class HospitalCardController {
 //        theModel.addAttribute("categories", categories);
         List<User> doctors = doctorService.findAll();
         theModel.addAttribute("doctors", doctors);
+        List<User> nurses = doctorService.findAllNurses();
+        theModel.addAttribute("nurses", doctors);
         return "hospitalcardeditform";
     }
 
@@ -95,7 +99,9 @@ public class HospitalCardController {
     public String editHospitalCard(@ModelAttribute("editedHospitalCard")
                                    HospitalCard hospitalCard) {
         User findDoctor = doctorService.findById(hospitalCard.getDoctor().getId());
+        User findNurse = doctorService.findById(hospitalCard.getNurse().getId());
         hospitalCard.setDoctor(findDoctor);
+        hospitalCard.setDoctor(findNurse);
         hospitalCardService.save(hospitalCard);
         return "redirect:/hospitalcards/list/" + hospitalCard.getPatient().getId();
     }
