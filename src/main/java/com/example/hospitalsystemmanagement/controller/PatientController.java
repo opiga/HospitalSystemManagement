@@ -33,10 +33,10 @@ public class PatientController {
         roleService = theRoleService;
     }
 
-    @RequestMapping("/")
-    public String home(Model m) {
-        return "index";
-    }
+//    @RequestMapping("/")
+//    public String home(Model m) {
+//        return "index";
+//    }
 
 
     @GetMapping("/list")
