@@ -1,13 +1,6 @@
-
 <%@ include file="include/begin-html.jsp" %>
 
 <br>
-
-
-<%--<fmt:message key="label.title" />--%>
-<%--<spring:message code="label.title" text="Default text"/>--%>
-
-
 <div id="page-content">
     <div class="container text-center">
         <section class="vh-60">

@@ -7,7 +7,7 @@
 
 <div class="p-3 text-center">
 
-    <h1 class="mb-2">Hospital cards, doctor ${doctor.firstName} ${doctor.lastName}
+    <h1 class="mb-2"><spring:message code="label.hospitalCards"/>, <spring:message code="label.doctor"/> ${doctor.firstName} ${doctor.lastName}
         <%--        <td>${hospitalCard.doctor.firstName} ${hospitalCard.doctor.lastName}--%>
     </h1>
 </div>
@@ -18,28 +18,26 @@
         <thead>
         <tr>
             <%--            <th class="text-center">id--%>
-            <th class="text-center">patient
-            <th class="text-center">preliminary Diagnosis
-            <th class="text-center">clinical Diagnosis
-            <th class="text-center">final Diagnosis
-            <th class="text-center">discharged
-            <th class="text-center">Actions
+            <th class="text-center"><spring:message code="label.patient"/>
+            <th class="text-center"><spring:message code="label.pDiagnosis"/>
+            <th class="text-center"><spring:message code="label.cDiagnosis"/>
+            <th class="text-center"><spring:message code="label.fDiagnosis"/>
+            <th class="text-center"><spring:message code="label.discharged"/>
+            <th class="text-center"><spring:message code="label.actions"/>
         <tbody>
         <c:forEach var="hospitalCard" items="${hospitalCards}">
         <tr>
                 <%--            <td>${hospitalCard.hospitalCardId}--%>
-            <td>${hospitalCard.patient.firstName} ${hospitalCard.patient.lastName}, date of birth: ${hospitalCard.patient.dateOfBirth}
+            <td>${hospitalCard.patient.firstName} ${hospitalCard.patient.lastName}, <spring:message code="label.dateOfBirth"/>: ${hospitalCard.patient.dateOfBirth}
             <td>${hospitalCard.preliminaryDiagnosis}
             <td>${hospitalCard.clinicalDiagnosis}
             <td>${hospitalCard.finalDiagnosis}
             <td>${hospitalCard.discharged}
             <td class="text-center">
                 <a class="btn btn-light"
-                   href="${pageContext.request.contextPath}/appointments/addAppointment/${hospitalCard.hospitalCardId}/${hospitalCard.patient.id}/${hospitalCard.doctor.id}">Make
-                    appointment</a>
+                   href="${pageContext.request.contextPath}/appointments/addAppointment/${hospitalCard.hospitalCardId}/${hospitalCard.patient.id}/${hospitalCard.doctor.id}"><spring:message code="label.makeAppointment"/></a>
                 <a class="btn btn-light"
-                   href="${pageContext.request.contextPath}/appointments/listAppointments/${hospitalCard.hospitalCardId}">View
-                    appointments</a>
+                   href="${pageContext.request.contextPath}/appointments/listAppointments/${hospitalCard.hospitalCardId}"><spring:message code="label.viewAppointment"/></a>
                 </c:forEach>
     </table>
 </div>

@@ -15,6 +15,7 @@ import java.util.List;
 public interface HospitalCardService {
     public List<HospitalCard> findAllByPatientId(Long id);
     public List<HospitalCard> findAllByDoctorId(Long id);
+    public List<HospitalCard> findAllByNurseId(Long id);
 
     public HospitalCard findById(Long theId);
 

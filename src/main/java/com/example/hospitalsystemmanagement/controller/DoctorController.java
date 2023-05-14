@@ -6,9 +6,12 @@ import com.example.hospitalsystemmanagement.repository.DoctorWithUsers;
 import com.example.hospitalsystemmanagement.service.CategoryService;
 import com.example.hospitalsystemmanagement.service.DoctorService;
 import com.example.hospitalsystemmanagement.service.RoleService;
+import com.example.hospitalsystemmanagement.validation.NewUserValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +30,10 @@ public class DoctorController {
     private CategoryService categoryService;
     private RoleService roleService;
 
-    public DoctorController(DoctorService theDoctorService, CategoryService categoryService,
-                            RoleService roleService) {
+    @Autowired
+    private NewUserValidator newFormValidator;
+
+    public DoctorController(DoctorService theDoctorService, CategoryService categoryService, RoleService roleService) {
         doctorService = theDoctorService;
         this.categoryService = categoryService;
         this.roleService = roleService;
@@ -38,7 +43,7 @@ public class DoctorController {
     public String listDoctors(Model theModel) {
         List<DoctorWithUsers> theDoctors = doctorService.findAllWithPatients();
         theModel.addAttribute("doctors", theDoctors);
-        return "viewdoctor";
+        return "viewDoctor";
     }
 
     @GetMapping("/adddoctor")
@@ -46,11 +51,17 @@ public class DoctorController {
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
         model.addAttribute("doctor", new User());
-        return "doctorform";
+        return "doctorForm";
     }
 
     @PostMapping("/adddoctoru")
-    public String addDoctor(@ModelAttribute("doctor") User doctor) {
+    public String addDoctor(@ModelAttribute("doctor") User doctor, BindingResult result, Model model) {
+        newFormValidator.validate(doctor, result);
+        if (result.hasErrors()) {
+            List<Category> categories = categoryService.findAll();
+            model.addAttribute("categories", categories);
+            return "doctorForm";
+        }
         doctor.setRole(roleService.findById(5L));
         doctorService.save(doctor);
         return "redirect:/doctors/list";
@@ -62,11 +73,17 @@ public class DoctorController {
         List<Category> categories = categoryService.findAll();
         model.addAttribute("editedDoctor", doctor);
         model.addAttribute("categories", categories);
-        return "doctoreditform";
+        return "doctorEditForm";
     }
 
     @PostMapping("/editsave/{id}")
-    public String editDoctor(@PathVariable("id") Long id, @ModelAttribute("editedDoctor") User doctor) {
+    public String editDoctor(@PathVariable("id") Long id, @ModelAttribute("editedDoctor") User doctor,BindingResult result,Model model) {
+        newFormValidator.validate(doctor, result);
+        if (result.hasErrors()) {
+            List<Category> categories = categoryService.findAll();
+            model.addAttribute("categories", categories);
+            return "doctorEditForm";
+        }
         Category category = categoryService.findById(doctor.getCategory().getCategoryId());
         doctor.setCategory(category);
         doctorService.save(doctor);

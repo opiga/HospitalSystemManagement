@@ -34,11 +34,6 @@
                 <form:textarea path="medications" class="form-control"/>
                 <form:errors path="medications" cssClass="error"/>
             </div>
-            <div class="form-group col-md-12">
-                <form:label class="text-center" path="operations"><spring:message code="label.operations"/>:</form:label>
-                <form:textarea path="operations" class="form-control"/>
-                <form:errors path="operations" cssClass="error"/>
-            </div>
         </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -47,16 +42,6 @@
                     <form:input path="date" class="form-control" type="date"/>
                     <form:errors path="date" cssClass="error"/>
                 </div>
-
-            <div class="form-group col-md-6">
-                <form:label class="text-center" path="nurse"><spring:message code="label.nurse"/>:</form:label>
-                <form:select class="form-control" path="nurse">
-                    <form:option value="" label="Choose a nurse" disabled="false"/>
-                    <form:options items="${nurses}" itemValue="id"
-                                  itemLabel="fullName"/>
-                </form:select>
-                <form:errors path="nurse" cssClass="error"/>
-            </div>
             </div>
 
             <button type="submit" class="btn btn-secondary" value="Save Changes"><spring:message code="label.save"/>

@@ -7,7 +7,7 @@
     color: red;
 }</style>
 <div class="p-3 text-center">
-    <h1 class="form-signin-heading">Create your account</h1>
+    <h1 class="form-signin-heading"><spring:message code="label.newAccount"/></h1>
 </div>
 
 <div class="container">
@@ -18,7 +18,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <form:label class="text-center"
-                            path="firstName">First name:</form:label>
+                            path="firstName"><spring:message code="label.firstName"/>:</form:label>
                 <form:input type="text" path="firstName"
                             class="form-control" placeholder="First name"
                             autofocus="true"></form:input>
@@ -26,7 +26,7 @@
             </div>
             <div class="form-group col-md-6">
                 <form:label class="text-center"
-                            path="lastName">Last name:</form:label>
+                            path="lastName"><spring:message code="label.lastName"/>:</form:label>
                 <form:input type="text" path="lastName"
                             class="form-control" placeholder="Last name"
                             autofocus="true"></form:input>
@@ -36,7 +36,7 @@
         <div class="form-row">
             <div class="form-group col-md-2">
                 <form:label class="text-center"
-                            path="dateOfBirth">Date of birth:</form:label>
+                            path="dateOfBirth"><spring:message code="label.dateOfBirth"/>:</form:label>
                 <form:input type="date" path="dateOfBirth"
                             class="form-control" placeholder="Date of birth"
                             autofocus="true"></form:input>
@@ -44,7 +44,7 @@
             </div>
             <div class="form-group col-md-4">
                 <form:label class="text-center"
-                            path="phoneNumber">Phone number:</form:label>
+                            path="phoneNumber"><spring:message code="label.phoneNumber"/>:</form:label>
                 <form:input type="text" path="phoneNumber"
                             class="form-control" placeholder="Phone number"
                             autofocus="true"></form:input>
@@ -52,7 +52,7 @@
             </div>
             <div class="form-group col-md-6">
                 <form:label class="text-center"
-                            path="address">Address:</form:label>
+                            path="address"><spring:message code="label.address"/>:</form:label>
                 <form:input type="text" path="address"
                             class="form-control" placeholder="Address"
                             autofocus="true"></form:input>
@@ -62,7 +62,7 @@
         <div class="form-row">
             <div class="form-group col-md-12">
                 <form:label class="text-center"
-                            path="email">Email:</form:label>
+                            path="email"><spring:message code="label.email"/>:</form:label>
                 <form:input type="text" path="email"
                             class="form-control" placeholder="Email"
                             autofocus="true"></form:input>
@@ -72,7 +72,7 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <form:label class="text-center"
-                            path="username">Username:</form:label>
+                            path="username"><spring:message code="label.username"/>:</form:label>
                 <form:input type="username" path="username"
                             class="form-control"
                             placeholder="Login"></form:input>
@@ -80,7 +80,7 @@
             </div>
             <div class="form-group col-md-4">
                 <form:label class="text-center"
-                            path="password">Password:</form:label>
+                            path="password"><spring:message code="label.password"/>:</form:label>
                 <form:input type="password" path="password"
                             class="form-control"
                             placeholder="Password"></form:input>
@@ -88,7 +88,7 @@
             </div>
             <div class="form-group col-md-4">
                 <form:label class="text-center"
-                            path="password">Password confirm:</form:label>
+                            path="password"><spring:message code="label.passwordConfirm"/>:</form:label>
                 <form:input type="password" path="passwordConfirm"
                             class="form-control"
                             placeholder="Confirm your password"></form:input>
@@ -96,7 +96,7 @@
             </div>
             <div class="form-group col-md-2">
                 <button class="btn btn-lg btn-secondary btn-block" type="submit">
-                    Register
+                    <spring:message code="label.registration"/>
                 </button>
             </div>
         </div>

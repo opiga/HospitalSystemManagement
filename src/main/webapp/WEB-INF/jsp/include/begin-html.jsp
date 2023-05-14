@@ -2,9 +2,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-<fmt:setBundle basename="messages"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,85 +20,83 @@
 <body class="d-flex flex-column">
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark" role="navigation">
     <div class="container">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/">Home</a>
-        <div class="collapse navbar-collapse" id="exCollapsingNavbar">
-            <ul class="nav navbar-nav">
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/patients/list"
-                                        class="nav-link">Patients</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/doctors/list"
-                                        class="nav-link">Doctors</a></li>
-                <li class="nav-item"><a href="${pageContext.request.contextPath}/appointments/list"
-                                        class="nav-link">Hospital Cards</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Contacts</a></li>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/">
+            <spring:message code="label.homePage"/>
+        </a>
+        <div class="collapse navbar-collapse" id="mainNavbar">
 
-            </ul>
-
-            <%--            <ul class="nav navbar-nav flex-row justify-content-between ml-auto">--%>
-            <%--                <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link"--%>
-            <%--                                                           title="settings"><i--%>
-            <%--                        class="fa fa-cog fa-fw fa-lg"></i></a></li>--%>
-
-            <%-- Если пользователь залогирован, то показываем его имя и кнопку "Logout" --%>
-            <%-- Если пользователь не залогирован, то показываем кнопку "Login" --%>
-            <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-                <%--                    <div class="dropdown">--%>
-                <%--                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">--%>
-                <%--                            <span th:text="#{lang.change}"></span>--%>
-                <%--                            <span class="caret"></span>--%>
-                <%--                        </button>--%>
-                <%--                        <ul class="dropdown-menu">--%>
-                <%--                            <li><a href="#" th:href="@{/changeLocale('en')}"><spring:message code="lang.eng"/></a></li>--%>
-                <%--                            <li><a href="#" th:href="@{/changeLocale('ru')}"><spring:message code="lang.ru"/></a></li>--%>
-                <%--                        </ul>--%>
-                <%--                    </div>--%>
+            <div class="collapse navbar-collapse" id="exCollapsingNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/patients/list" class="nav-link">
+                            <spring:message code="label.patients"/>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/doctors/list" class="nav-link">
+                            <spring:message code="label.doctors"/>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/appointments/list"
+                           class="nav-link">
+                            <spring:message code="label.hospitalCards"/>
+                        </a>
+                    </li>
+                </ul>
 
 
-                <% if (request.getUserPrincipal() != null) { %>
-                <li class="nav-item order-2 order-md-1">
-                        <span class="navbar-text text-white mx-3">
-                            Welcome, <%= request.getUserPrincipal().getName() %> !
-                        </span>
-                </li>
-
-                <li class="nav-item order-2">
-                    <form method="POST" action="/logout" class="form-inline">
-                        <%--                            <button type="submit" class="btn btn-outline-dark my-2 my-sm-0">Logout</button>--%>
-                        <button type="submit" class="btn btn-dark">Logout</button>
+                <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                    <% if (request.getUserPrincipal() != null) { %>
+                    <li class=" nav-item order-2 order-md-1 ">
+                            <span class="navbar-text text-white mx-3"><spring:message code="label.welcome"/>, <%= request.getUserPrincipal().getName()%> !</span>
+                    </li>
+                    <li class="nav-item order-2">
+                        <form method="POST" action="/logout" class="form-inline">
+                            <button type="submit" class="btn btn-dark"><spring:message code="label.logOut"/></button>
+                        </form>
+                    </li>
+                    <% }
+                    else { %>
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/login" class="nav-link">
+                            <spring:message code="label.signIn"/>
+                        </a>
+                    </li>
                     </form>
-                </li>
-                <% }
-                else { %>
-                    <li class="nav-item"><a href="?lang=en" class="nav-link">English </a></li>
-                    <li class="nav-item"><a href="?lang=ru" class="nav-link">Russian </a></li>
-                    <li class="nav-item"><a href="${pageContext.request.contextPath}/login"
-                                            class="nav-link"><spring:message
-                            code="label.signIn"/></a></li>
+                    <% } %>
+                </ul>
 
-                <%--                <li class="dropdown order-2">--%>
 
-                <%--                    <button type="button"--%>
-                <%--                            class="btn btn-dark dropdown-toggle">Login--%>
-                <%--                    </button>--%>
-                <%--                    <sec:authorize access="isAuthenticated()">--%>
-                <%--                        <% response.sendRedirect("/"); %>--%>
-                <%--                    </sec:authorize>--%>
-                <%--                    <form class="dropdown-menu p-4" method="POST" action="/login">--%>
-                <%--                        <div class="form-group">--%>
-                <%--                            <label for="exampleDropdownFormLogin2">Login</label>--%>
-                <%--                            <input name="username" type="text" class="form-control"--%>
-                <%--                                   id="exampleDropdownFormLogin2" placeholder="Enter login">--%>
-                <%--                        </div>--%>
-                <%--                        <div class="form-group">--%>
-                <%--                            <label for="exampleDropdownFormPassword2">Password</label>--%>
-                <%--                            <input name="password" type="password" class="form-control"--%>
-                <%--                                   id="exampleDropdownFormPassword2" placeholder="Password">--%>
-                <%--                        </div>--%>
-                <%--                <button type="submit" class="btn btn-dark">Log in</button>--%>
-
-                </form>
-                <%--                </li>--%>
-                <% } %>
-            </ul>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-dark dropdown-toggle" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                    <c:if test="${not empty pageContext.request.getAttribute('lang')}">
+                        <spring:message
+                                code="label.${pageContext.request.getAttribute('lang')}"/>
+                    </c:if>
+                    <c:if test="${empty pageContext.request.getAttribute('lang') and not empty cookie['localeInfo']}">
+                        <spring:message code="label.${cookie.get('localeInfo').value}"/>
+                    </c:if>
+                    <c:if test="${empty pageContext.request.getAttribute('lang') and empty cookie['localeInfo']}">
+                        <spring:message code="label.en"/>
+                    </c:if>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li>
+                        <a class="dropdown-item" href="/lang?lang=en">
+                            <spring:message code="label.en"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/lang?lang=ru">
+                            <spring:message code="label.ru"/>
+                        </a>
+                    </li>
+                </div>
+            </div>
         </div>
     </div>
 </nav>

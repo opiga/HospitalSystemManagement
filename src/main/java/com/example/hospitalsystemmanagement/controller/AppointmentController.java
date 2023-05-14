@@ -8,10 +8,14 @@ import com.example.hospitalsystemmanagement.service.AppointmentService;
 import com.example.hospitalsystemmanagement.service.DoctorService;
 import com.example.hospitalsystemmanagement.service.HospitalCardService;
 import com.example.hospitalsystemmanagement.service.PatientService;
+import com.example.hospitalsystemmanagement.validation.AppointmentValidator;
+import com.example.hospitalsystemmanagement.validation.NewFormValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +34,9 @@ public class AppointmentController {
     private HospitalCardService hospitalCardService;
     private AppointmentService appointmentService;
 
+    @Autowired
+    private AppointmentValidator appointmentValidator;
+
     public AppointmentController(PatientService thePatientService, AppointmentService theAppointmentService,
                                  DoctorService theDoctorService,
                                  HospitalCardService theHospitalCardService) {
@@ -41,12 +48,13 @@ public class AppointmentController {
 
     @GetMapping("/list")
     public String getHospitalCardsForCurrentUser(@AuthenticationPrincipal User currentUser, Model theModel) {
+        System.out.println("%%%%%%%%%%%%%%%%%");
         List<HospitalCard> theHospitalCards = hospitalCardService.findAllByDoctorId(currentUser.getId());
         theModel.addAttribute("hospitalCards", theHospitalCards);
         theModel.addAttribute("doctor", currentUser);
 //        List<Appointment> appointments = appointmentService.getAppointmentsByDoctorId(currentUser.getId());
 //        model.addAttribute("appointments", appointments);
-        return "viewhospitalcardsDoctor";
+        return "viewHospitalCardsDoctor";
     }
 
     @GetMapping("/listAppointments/{hospitalCardId}")
@@ -73,7 +81,13 @@ public class AppointmentController {
     }
 
     @PostMapping("/addAppointment")
-    public String addAppointment(@ModelAttribute("appointment") Appointment appointment) {
+    public String addAppointment(@ModelAttribute("appointment") Appointment appointment, BindingResult result, Model model) {
+        appointmentValidator.validate(appointment, result);
+        if (result.hasErrors()) {
+            List<User> nurses = doctorService.findAllNurses();
+            model.addAttribute("nurses", nurses);
+            return "appointmentForm";
+        }
         appointmentService.save(appointment);
         return "redirect:/appointments/list";
     }
@@ -87,7 +101,17 @@ public class AppointmentController {
     }
 
     @PostMapping("/editsave")
-    public String editAppointment(@ModelAttribute("editedAppointment") Appointment appointment) {
+    public String editAppointment(@ModelAttribute("editedAppointment") Appointment appointment,BindingResult result,
+                                  Model model) {
+        appointmentValidator.validate(appointment, result);
+        if (result.hasErrors()) {
+            List<User> doctors = doctorService.findAll();
+            model.addAttribute("doctors", doctors);
+            List<User> nurses = doctorService.findAllNurses();
+            model.addAttribute("nurses", nurses);
+            return "hospitalCardEditForm";
+        }
+
         appointmentService.save(appointment);
         return "redirect:/appointments/list";
     }

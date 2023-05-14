@@ -5,7 +5,7 @@
 <link href=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/css/dataTables.bootstrap4.min.css
       rel=stylesheet>
 <div class="p-3 text-center">
-    <h1 class="mb-2">Appointments</h1>
+    <h1 class="mb-2"><spring:message code="label.appointments"/></h1>
 </div>
 <div class=container>
     <table class="table table-responsive table-bordered table-hover table-inverse table-striped"
@@ -26,7 +26,7 @@
         <tbody>
         <c:forEach var="appointment" items="${appointments}">
         <tr>
-            <td>${appointment.patient.firstName} ${appointment.patient.lastName}, date of birth: ${appointment.patient.dateOfBirth}
+            <td>${appointment.patient.firstName} ${appointment.patient.lastName}, <spring:message code="label.dateOfBirth"/>: ${appointment.patient.dateOfBirth}
             <td>${appointment.procedures}
             <td>${appointment.medications}
             <td>${appointment.operations}
@@ -40,7 +40,7 @@
                href="${pageContext.request.contextPath}/appointments/editAppointment/${appointment.id}">Edit</a>
 
             <a class="btn btn-light"
-               href="${pageContext.request.contextPath}/appointments/addAppointment/${appointment.hospitalCard.hospitalCardId}/${appointment.patient.id}/${appointment.doctor.id}">Make appointment</a>
+               href="${pageContext.request.contextPath}/appointments/addAppointment/${appointment.hospitalCard.hospitalCardId}/${appointment.patient.id}/${appointment.doctor.id}"><spring:message code="label.makeAppointment"/></a>
 <%--                <c:if test="${patient.number_Of_Hospital_Cards == 0}">--%>
 <%--                <a class="btn btn-light"--%>
 <%--                   href="${pageContext.request.contextPath}/hospitalcards/addhospitalcard/${patient.id}">--%>
@@ -56,7 +56,7 @@
                 </c:forEach>
     </table>
     <br>
-    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/appointments/list">Return to Hospital Cards</a>
+    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/appointments/list"><spring:message code="label.returnToHospitalCards"/></a>
 <%--    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/appointments/list">Make appointment</a>--%>
 </div>
 <br>

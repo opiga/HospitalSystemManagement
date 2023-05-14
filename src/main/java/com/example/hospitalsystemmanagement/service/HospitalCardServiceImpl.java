@@ -1,6 +1,8 @@
 package com.example.hospitalsystemmanagement.service;
 
 import com.example.hospitalsystemmanagement.entity.HospitalCard;
+import com.example.hospitalsystemmanagement.entity.Role;
+import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.repository.HospitalCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,11 @@ public class HospitalCardServiceImpl implements HospitalCardService {
     }
 
     @Override
+    public List<HospitalCard> findAllByNurseId(Long id) {
+        return hospitalCardRepository.findAllByNurseId(id);
+    }
+
+    @Override
     public HospitalCard findById(Long theId) {
         Optional<HospitalCard> result = hospitalCardRepository.findById(theId);
         HospitalCard theHospitalCard = null;
@@ -47,8 +54,8 @@ public class HospitalCardServiceImpl implements HospitalCardService {
     }
 
     @Override
-    public void save(HospitalCard thePatient) {
-        hospitalCardRepository.save(thePatient);
+    public void save(HospitalCard theHospitalCard) {
+        hospitalCardRepository.save(theHospitalCard);
     }
 
     @Override

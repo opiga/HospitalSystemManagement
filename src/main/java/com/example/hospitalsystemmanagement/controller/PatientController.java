@@ -12,9 +12,12 @@ import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.repository.PatientWithNumberOpenedHospitalCards;
 import com.example.hospitalsystemmanagement.service.PatientService;
 import com.example.hospitalsystemmanagement.service.RoleService;
+import com.example.hospitalsystemmanagement.validation.NewUserValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,32 +31,33 @@ public class PatientController {
     private PatientService patientService;
     private RoleService roleService;
 
+    @Autowired
+    private NewUserValidator newFormValidator;
+
     public PatientController(PatientService thePatientService, RoleService theRoleService) {
         patientService = thePatientService;
         roleService = theRoleService;
     }
 
-//    @RequestMapping("/")
-//    public String home(Model m) {
-//        return "index";
-//    }
-
-
     @GetMapping("/list")
     public String listPatients(Model theModel) {
         List<PatientWithNumberOpenedHospitalCards> thePatients = patientService.findAllWithNumberOpenedHospitalCards();
         theModel.addAttribute("patients", thePatients);
-        return "viewpatient";
+        return "viewPatient";
     }
 
     @GetMapping("/addpatient")
     public String showAddPatientForm(Model model) {
         model.addAttribute("patient", new User());
-        return "patientform";
+        return "patientForm";
     }
 
     @PostMapping("/addpatientu")
-    public String addPatient(@ModelAttribute("patient") User patient) {
+    public String addPatient(@ModelAttribute("patient") User patient, BindingResult result) {
+        newFormValidator.validate(patient, result);
+        if (result.hasErrors()) {
+            return "patientForm";
+        }
         patient.setRole(roleService.findByName("patient"));
         patientService.save(patient);
         return "redirect:/patients/list";
@@ -63,7 +67,7 @@ public class PatientController {
     public String edit(@PathVariable("id") Long patientId, Model m) {
         User patient = patientService.findById(patientId);
         m.addAttribute("patient", patient);
-        return "patienteditform";
+        return "patientEditForm";
     }
 
     @PostMapping(value = "/editsave")

@@ -27,7 +27,9 @@ import java.util.*;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class User implements UserDetails {
+public class
+
+User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -40,7 +42,7 @@ public class User implements UserDetails {
     @Column(name = "last_Name")
     private String lastName;
 
-    private String fullName;
+//    private String fullName;
     @NotNull
     @Column(name = "date_Of_Birth")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -146,11 +148,6 @@ public class User implements UserDetails {
     {
         return firstName+"  "+lastName;
     };
-
-//    public void setPassword(String password) {
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        this.password = passwordEncoder.encode(password);
-//    }
 
 
     public String getFullName() {

@@ -5,21 +5,21 @@
 <link href=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/css/dataTables.bootstrap4.min.css
       rel=stylesheet>
 <div class="p-3 text-center">
-    <h1 class="mb-2">Patients List</h1>
+    <h1 class="mb-2"><spring:message code="label.viewPatients"/></h1>
 </div>
 <div class=container>
     <table class="table table-bordered table-hover table-inverse table-striped"
            id=example>
         <thead>
         <tr>
-            <th class="text-center">firstName
-            <th class="text-center">lastName
-            <th class="text-center">dateOfBirth
-            <th class="text-center">email
-            <th class="text-center">phoneNumber
-            <th class="text-center">address
+            <th class="text-center"><spring:message code="label.firstName"/>
+            <th class="text-center"><spring:message code="label.lastName"/>
+            <th class="text-center"><spring:message code="label.dateOfBirth"/>
+            <th class="text-center"><spring:message code="label.email"/>
+            <th class="text-center"><spring:message code="label.phoneNumber"/>
+            <th class="text-center"><spring:message code="label.address"/>
                 <%--            <th class="text-center">Opened Cards--%>
-            <th class="text-center">Actions
+            <th class="text-center"><spring:message code="label.actions"/>
 
         <tbody>
         <c:forEach var="patient" items="${patients}">
@@ -32,26 +32,24 @@
             <td>${patient.address}
                     <%--            <td>${patient.number_Of_Hospital_Cards}--%>
             <td class="text-center"><a class="btn btn-light"
-                                       href="${pageContext.request.contextPath}/patients/editpatient/${patient.id}">Edit</a>
+                                       href="${pageContext.request.contextPath}/patients/editpatient/${patient.id}"><spring:message code="label.edit"/></a>
 
                 <c:if test="${patient.number_Of_Hospital_Cards == 0}">
                 <a class="btn btn-light"
                    href="${pageContext.request.contextPath}/hospitalcards/addhospitalcard/${patient.id}">
-                    Add New Hospital Card</a>
+                    <spring:message code="label.addHospitalCard"/></a>
                 </c:if>
                 <c:if test="${patient.number_Of_Hospital_Cards > 0}">
                 <a class="btn btn-light"
                    href="${pageContext.request.contextPath}/hospitalcards/list/${patient.id}">
-                    Open Cards
+                    <spring:message code="label.openCards"/>
                 </a>
                 </c:if>
 
                 </c:forEach>
     </table>
     <br>
-    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/patients/addpatient">Add
-        new
-        patient</a>
+    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/patients/addpatient"> <spring:message code="label.addPatient"/></a>
 </div>
 <br>
 <br>

@@ -5,7 +5,7 @@
 <link href=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/css/dataTables.bootstrap4.min.css
       rel=stylesheet>
 <div class="p-3 text-center">
-    <h1 class="mb-2">Doctors List</h1>
+    <h1 class="mb-2"><spring:message code="label.viewDoctors"/></h1>
 </div>
 <div class=container>
     <table class="table table-bordered table-hover table-inverse table-striped"
@@ -14,13 +14,13 @@
         <tr>
 
 <%--            <th class="text-center">id--%>
-            <th class="text-center">firstName
-            <th class="text-center">lastName
-            <th class="text-center">email
-            <th class="text-center">phoneNumber
-            <th class="text-center">category
-            <th class="text-center">number of Patients
-            <th class="text-center">Actions
+            <th class="text-center"><spring:message code="label.firstName"/>
+            <th class="text-center"><spring:message code="label.lastName"/>
+            <th class="text-center"><spring:message code="label.email"/>
+            <th class="text-center"><spring:message code="label.phoneNumber"/>
+            <th class="text-center"><spring:message code="label.category"/>
+            <th class="text-center"><spring:message code="label.numberOfPatients"/>
+            <th class="text-center"><spring:message code="label.actions"/>
         <tbody>
         <c:forEach var="doctor" items="${doctors}">
         <tr>
@@ -33,15 +33,14 @@
             <td>${doctor.number_Of_Patients}</td>
 
         <td><a class="btn btn-light"
-               href="${pageContext.request.contextPath}/doctors/editdoctor/${doctor.id}">Edit</a>
+               href="${pageContext.request.contextPath}/doctors/editdoctor/${doctor.id}"><spring:message code="label.edit"/></a>
             <a class="btn btn-light"
-               href="${pageContext.request.contextPath}/doctors/delete/${doctor.id}">Delete</a>
+               href="${pageContext.request.contextPath}/doctors/delete/${doctor.id}"><spring:message code="label.delete"/></a>
             </c:forEach>
 
     </table>
     <br>
-    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/doctors/adddoctor">Add new
-        doctor</a>
+    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/doctors/adddoctor"><spring:message code="label.addDoctor"/></a>
 </div>
 <br>
 <br>

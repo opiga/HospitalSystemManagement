@@ -14,9 +14,12 @@ import com.example.hospitalsystemmanagement.service.CategoryService;
 import com.example.hospitalsystemmanagement.service.DoctorService;
 import com.example.hospitalsystemmanagement.service.HospitalCardService;
 import com.example.hospitalsystemmanagement.service.PatientService;
+import com.example.hospitalsystemmanagement.validation.NewFormValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -34,13 +37,16 @@ public class HospitalCardController {
     private DoctorService doctorService;
     private PatientService patientService;
 
+    @Autowired
+    private NewFormValidator newFormValidator;
+
     public HospitalCardController(HospitalCardService theHospitalCardService,
                                   CategoryService theCategoryService, DoctorService theDoctorService
-                                 , PatientService thePatientService) {
+            , PatientService thePatientService) {
         hospitalCardService = theHospitalCardService;
         categoryService = theCategoryService;
         doctorService = theDoctorService;
-        patientService=thePatientService;
+        patientService = thePatientService;
     }
 
     @RequestMapping("/")
@@ -57,13 +63,13 @@ public class HospitalCardController {
         LocalDate birthDate = theHospitalCards.get(0).getPatient().getDateOfBirth();
         LocalDate currentDate = LocalDate.now();
         theModel.addAttribute("age", Period.between(birthDate, currentDate).getYears());
-        return "viewhospitalcards";
+        return "viewHospitalCards";
     }
 
 
     @GetMapping("/addhospitalcard/{id}")
-    public String showAddHospitalCardForm(@PathVariable("id") Long patientId,Model model) {
-        HospitalCard newHospitalCard=new HospitalCard();
+    public String showAddHospitalCardForm(@PathVariable("id") Long patientId, Model model) {
+        HospitalCard newHospitalCard = new HospitalCard();
         newHospitalCard.setPatient(patientService.findById(patientId));
         model.addAttribute("newHospitalCard", newHospitalCard);
         List<User> doctors = doctorService.findAll();
@@ -74,7 +80,17 @@ public class HospitalCardController {
     }
 
     @PostMapping("/addNewHospitalCard")
-    public String addHospitalCard(@ModelAttribute("newHospitalCard") HospitalCard hospitalCard) {
+    public String addHospitalCard(@ModelAttribute("newHospitalCard") HospitalCard hospitalCard, BindingResult result, Model model) {
+
+        newFormValidator.validate(hospitalCard, result);
+        if (result.hasErrors()) {
+            model.addAttribute("newHospitalCard", hospitalCard);
+            List<User> doctors = doctorService.findAll();
+            model.addAttribute("doctors", doctors);
+            List<User> nurses = doctorService.findAllNurses();
+            model.addAttribute("nurses", nurses);
+            return "hospitalCardForm";
+        }
         User findDoctor = doctorService.findById(hospitalCard.getDoctor().getId());
         hospitalCard.setDoctor(findDoctor);
         hospitalCardService.save(hospitalCard);
@@ -92,12 +108,22 @@ public class HospitalCardController {
         theModel.addAttribute("doctors", doctors);
         List<User> nurses = doctorService.findAllNurses();
         theModel.addAttribute("nurses", doctors);
-        return "hospitalcardeditform";
+        return "hospitalCardEditForm";
     }
 
     @PostMapping(value = "/editsave")
     public String editHospitalCard(@ModelAttribute("editedHospitalCard")
-                                   HospitalCard hospitalCard) {
+                                   HospitalCard hospitalCard, BindingResult result,
+                                   Model model) {
+        newFormValidator.validate(hospitalCard, result);
+        if (result.hasErrors()) {
+            List<User> doctors = doctorService.findAll();
+            model.addAttribute("doctors", doctors);
+            List<User> nurses = doctorService.findAllNurses();
+            model.addAttribute("nurses", nurses);
+            return "hospitalCardEditForm";
+        }
+
         User findDoctor = doctorService.findById(hospitalCard.getDoctor().getId());
         User findNurse = doctorService.findById(hospitalCard.getNurse().getId());
         hospitalCard.setDoctor(findDoctor);
