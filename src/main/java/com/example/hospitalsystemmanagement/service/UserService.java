@@ -31,7 +31,7 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found");
+//            throw new UsernameNotFoundException("User not found");
         }
         return user;
     }
@@ -47,12 +47,11 @@ public class UserService implements UserDetailsService {
 
     public boolean saveUser(User user) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
-        System.out.println(user.getUsername());
         if (userFromDB != null) {
             return false;
         }
         Role role = null;
-        Optional<Role> optionalRole = roleRepository.findById(1L);
+        Optional<Role> optionalRole = roleRepository.findById(4L);
         ;
         if (optionalRole.isPresent()) {
             role = optionalRole.get();

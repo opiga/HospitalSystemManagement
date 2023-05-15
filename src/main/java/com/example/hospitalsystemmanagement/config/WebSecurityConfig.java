@@ -26,28 +26,51 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers("/registration").not().fullyAuthenticated()
-                .antMatchers("/appointments/**").permitAll()
+//        httpSecurity
+//                .csrf()
+//                .disable()
+//                .authorizeRequests()
+//                .antMatchers("/registration").not().fullyAuthenticated()
+//                .antMatchers("/appointments/**").permitAll()
+////                .antMatchers("/appointments/**").hasRole("NURSE")
+//                .antMatchers("/patients/**", "/doctors/**").hasRole("DOCTOR")
+//                .antMatchers("/", "/lang", "/resources/**").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .permitAll()
+////                .failureUrl("/login")
+////                .failureHandler(authenticationFailureHandler())
+//                .defaultSuccessUrl("/")
+//                .and()
+//                .logout()
+//                .permitAll()
+//                .logoutSuccessUrl("/");
+
+            httpSecurity
+                    .csrf()
+                    .disable()
+                    .authorizeRequests()
+                    .antMatchers("/registration").not().fullyAuthenticated()
+                    .antMatchers("/appointments/**").permitAll()
 //                .antMatchers("/appointments/**").hasRole("NURSE")
-                .antMatchers("/patients/**", "/doctors/**").hasRole("DOCTOR")
-                .antMatchers("/", "/lang", "/resources/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                    .antMatchers("/patients/**", "/doctors/**").hasRole("DOCTOR")
+                    .antMatchers("/", "/lang", "/resources/**").permitAll()
+                    .anyRequest().authenticated()
+                    .and()
+                    .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
 //                .failureUrl("/login")
 //                .failureHandler(authenticationFailureHandler())
-                .defaultSuccessUrl("/")
-                .and()
-                .logout()
-                .permitAll()
-                .logoutSuccessUrl("/");
-    }
+                    .defaultSuccessUrl("/")
+                    .and()
+                    .logout()
+                    .permitAll()
+                    .logoutSuccessUrl("/");
+        }
+
 
 
     @Autowired

@@ -26,7 +26,6 @@
             <sec:authorize access="isAuthenticated()">
               <h5><a href="/logout" class="text-secondary"><spring:message code="label.logOut"/></a></h5>
             </sec:authorize>
-            <h5><a href="/news" class="text-secondary">news (for user role)</a></h5>
             <h5><a href="${pageContext.request.contextPath}/patients/list"
                    class="text-secondary"><spring:message code="label.viewPatients"/></a></h5>
             <h5><a href="${pageContext.request.contextPath}/doctors/list"

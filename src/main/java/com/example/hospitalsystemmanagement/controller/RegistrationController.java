@@ -3,10 +3,9 @@ package com.example.hospitalsystemmanagement.controller;
 
 import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.service.UserService;
-//import com.example.hospitalsystemmanagement.validation.SignupValidator;
+import com.example.hospitalsystemmanagement.validation.SignupValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +17,8 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
-//    @Autowired
-//    private SignupValidator signupValidator;
+    @Autowired
+    private SignupValidator signupValidator;
 
     @GetMapping
     public String signup(ModelMap model) {
@@ -29,8 +28,8 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String processSignup(@ModelAttribute("userForm") User signupForm, BindingResult result, Model model) {
-//        signupValidator.validate(signupForm, result);
+    public String processSignup(@ModelAttribute("userForm") User signupForm, BindingResult result) {
+        signupValidator.validate(signupForm, result);
         if (result.hasErrors()) {
             return "registration";
         }

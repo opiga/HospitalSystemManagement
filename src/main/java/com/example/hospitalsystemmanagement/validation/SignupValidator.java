@@ -23,10 +23,6 @@ public class SignupValidator implements Validator {
     @Autowired
     private MessageSource messageSource;
 
-//    public void setMessageSource(MessageSource messageSource) {
-//        this.messageSource = messageSource;
-//    }
-
     @Autowired
     private UserService userService;
 
@@ -36,7 +32,6 @@ public class SignupValidator implements Validator {
 
     public void validate(Object target, Errors errors) {
         User signupUser = (User) target;
-
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "firstName.empty", messageSource.getMessage("validation.empty.firstName", null, LocaleContextHolder.getLocale()));
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "lastName.empty", messageSource.getMessage("validation.empty.lastName", null, LocaleContextHolder.getLocale()));
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateOfBirth", "dateOfBirth.empty", messageSource.getMessage("validation.empty.dateOfBirth", null, LocaleContextHolder.getLocale()));
@@ -49,7 +44,6 @@ public class SignupValidator implements Validator {
         if ((lastName.length()) > 15) {
             errors.rejectValue("lastName", "lastName.tooLong", messageSource.getMessage("validation.moreCharacters.lastName", null, LocaleContextHolder.getLocale()));
         }
-
         Pattern patternPhone = Pattern.compile("^\\+(?:[0-9] ?){6,14}[0-9]$");
         Matcher matcherPhone = patternPhone.matcher(signupUser.getPhoneNumber());
         if (!matcherPhone.matches()) {
@@ -67,22 +61,18 @@ public class SignupValidator implements Validator {
         if ((username.length()) > 15) {
             errors.rejectValue("username", "username.tooLong", messageSource.getMessage("validation.moreCharacters.userName", null, LocaleContextHolder.getLocale()));
         }
-        if (userService.loadUserByUsername(username) != null) {
+        System.out.println(userService.loadUserByUsername(username));
+        if (userService.loadUserByUsername(username)!=null) {
             errors.rejectValue("username", "username", messageSource.getMessage("validation.exists.userName", null, LocaleContextHolder.getLocale()));
         }
-
-
-        Pattern patternPassword = Pattern.compile("/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/g");
+        Pattern patternPassword = Pattern.compile("(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}");
         Matcher matcherPassword = patternPassword.matcher(signupUser.getPassword());
         if (!matcherPassword.matches()) {
             errors.rejectValue("password", "password.invalid", messageSource.getMessage("validation.invalidFormat.password", null, LocaleContextHolder.getLocale()));
         }
-
-
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "validation.empty.password", messageSource.getMessage("validation.invalidFormat.password", null, LocaleContextHolder.getLocale()));
         if (!(signupUser.getPassword()).equals(signupUser.getPasswordConfirm())) {
             errors.rejectValue("passwordConfirm", "passwordConfirm.passwordDontMatch", messageSource.getMessage("validation.dontMatch.password", null, LocaleContextHolder.getLocale()));
         }
-
     }
 }

@@ -36,14 +36,6 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-4">
-                <p class="small fw-bold "><spring:message code="label.noAccount"/>
-                    <a href="/registration" class="link-danger"><spring:message
-                            code="label.registration"/></a></p>
-            </div>
-        </div>
-
-        <div class="form-row">
             <div class="form-group col-md-2">
                 <button class="btn  btn-secondary btn-block" type="submit">
                     <spring:message code="label.signIn"/>
@@ -51,6 +43,13 @@
             </div>
         </div>
     </form:form>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <p class="small fw-bold "><spring:message code="label.noAccount"/>
+                <a href="/registration" class="link-danger"><spring:message
+                        code="label.registration"/></a></p>
+        </div>
+    </div>
 </div>
 
 <%@ include file="include/end-html.jsp" %>

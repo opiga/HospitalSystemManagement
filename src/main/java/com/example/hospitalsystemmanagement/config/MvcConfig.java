@@ -34,9 +34,9 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(localeChangeInterceptor());
     }
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/news").setViewName("news");
-    }
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/login").setViewName("login");
+//        registry.addViewController("/news").setViewName("news");
+//    }
 }

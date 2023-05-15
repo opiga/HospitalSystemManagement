@@ -19,8 +19,6 @@ public interface DoctorRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT * FROM users where users.role_Id=(Select roles.id from roles where roles.role_Name='nurse')", nativeQuery = true)
     public List<User> findAllNurses();
 
-
-
     @Query(value = "SELECT u.id, u.first_Name, u.last_Name, u.date_Of_Birth, u.email,\n" +
             "            u.phone_Number, u.address, c.name_Category,\n" +
             "            COUNT(DISTINCT a.patient_Id_Appoint) as number_Of_Patients FROM users as u \n" +

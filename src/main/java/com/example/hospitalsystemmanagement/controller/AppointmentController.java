@@ -1,9 +1,6 @@
 package com.example.hospitalsystemmanagement.controller;
 
-import com.example.hospitalsystemmanagement.entity.Appointment;
-import com.example.hospitalsystemmanagement.entity.Category;
-import com.example.hospitalsystemmanagement.entity.HospitalCard;
-import com.example.hospitalsystemmanagement.entity.User;
+import com.example.hospitalsystemmanagement.entity.*;
 import com.example.hospitalsystemmanagement.service.AppointmentService;
 import com.example.hospitalsystemmanagement.service.DoctorService;
 import com.example.hospitalsystemmanagement.service.HospitalCardService;
@@ -46,14 +43,36 @@ public class AppointmentController {
         appointmentService = theAppointmentService;
     }
 
+//    @GetMapping("/list")
+//    public String getHospitalCardsForCurrentUser(@AuthenticationPrincipal User currentUser, Model theModel) {
+//        List<HospitalCard> theHospitalCards = hospitalCardService.findAllByDoctorId(currentUser.getId());
+//        theModel.addAttribute("hospitalCards", theHospitalCards);
+//        theModel.addAttribute("doctor", currentUser);
+////        List<Appointment> appointments = appointmentService.getAppointmentsByDoctorId(currentUser.getId());
+////        model.addAttribute("appointments", appointments);
+//        return "viewHospitalCardsDoctor";
+//    }
+
+    @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE')")
     @GetMapping("/list")
     public String getHospitalCardsForCurrentUser(@AuthenticationPrincipal User currentUser, Model theModel) {
-        System.out.println("%%%%%%%%%%%%%%%%%");
-        List<HospitalCard> theHospitalCards = hospitalCardService.findAllByDoctorId(currentUser.getId());
-        theModel.addAttribute("hospitalCards", theHospitalCards);
-        theModel.addAttribute("doctor", currentUser);
-//        List<Appointment> appointments = appointmentService.getAppointmentsByDoctorId(currentUser.getId());
-//        model.addAttribute("appointments", appointments);
+        System.out.println("!!!!!!!!!!!");
+        System.out.println(currentUser.getRole());
+        System.out.println(currentUser.getUsername());
+        System.out.println(currentUser.getRole().getId());
+
+        if (currentUser.getRole().getRoleName().contains(RoleType.DOCTOR.toString())) {
+            List<HospitalCard> theHospitalCards = hospitalCardService.findAllByDoctorId(currentUser.getId());
+            theModel.addAttribute("hospitalCards", theHospitalCards);
+            theModel.addAttribute("doctor", currentUser);
+            return "viewHospitalCardsDoctor";
+        } else if (currentUser.getRole().getRoleName().contains(RoleType.NURSE.toString())) {
+            List<HospitalCard> theHospitalCards = hospitalCardService.findAllByNurseId(currentUser.getId());
+            theModel.addAttribute("hospitalCards", theHospitalCards);
+            theModel.addAttribute("nurse", currentUser);
+            return "viewHospitalCardsNurse";
+        }
+        System.out.println("@@@@@@@@@@@");
         return "viewHospitalCardsDoctor";
     }
 
