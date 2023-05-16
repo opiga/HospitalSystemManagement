@@ -10,6 +10,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,6 +37,13 @@ public class SignupValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "firstName.empty", messageSource.getMessage("validation.empty.firstName", null, LocaleContextHolder.getLocale()));
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "lastName.empty", messageSource.getMessage("validation.empty.lastName", null, LocaleContextHolder.getLocale()));
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateOfBirth", "dateOfBirth.empty", messageSource.getMessage("validation.empty.dateOfBirth", null, LocaleContextHolder.getLocale()));
+
+
+        LocalDate currentDate = LocalDate.now();
+        if ( signupUser.getDateOfBirth()!=null&&signupUser.getDateOfBirth().isAfter(currentDate)) {
+            errors.rejectValue("dateOfBirth", "dateOfBirth.invalid",  messageSource.getMessage("validation.dateOfBirth.invalid", null, LocaleContextHolder.getLocale()));
+        }
+
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "address.empty", messageSource.getMessage("validation.empty.address", null, LocaleContextHolder.getLocale()));
         String firstName = signupUser.getFirstName();
         if ((firstName.length()) > 15) {

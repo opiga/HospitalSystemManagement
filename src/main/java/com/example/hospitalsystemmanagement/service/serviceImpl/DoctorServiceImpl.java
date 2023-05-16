@@ -1,9 +1,10 @@
-package com.example.hospitalsystemmanagement.service;
+package com.example.hospitalsystemmanagement.service.serviceImpl;
 
 import com.example.hospitalsystemmanagement.entity.Role;
 import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.repository.DoctorRepository;
 import com.example.hospitalsystemmanagement.repository.DoctorWithUsers;
+import com.example.hospitalsystemmanagement.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -52,12 +52,18 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
+                <form:label class="text-center" path="username"><spring:message code="label.username"/>:</form:label>
+                <form:input class="form-control" path="username"
+                            value="${editedDoctor.username}"/>
+                <form:errors path="username" cssClass="error"/>
+            </div>
+            <div class="form-group col-md-4">
                 <form:label class="text-center" path="password"><spring:message code="label.password"/>:</form:label>
                 <form:input path="password" class="form-control"/>
                 <form:errors path="password" cssClass="error"/>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                <form:label class="text-center" path="category"><spring:message code="label.category"/>:</form:label>
                 <form:select class="form-control" path="category.categoryId">
                     <form:options items="${categories}" itemValue="categoryId"

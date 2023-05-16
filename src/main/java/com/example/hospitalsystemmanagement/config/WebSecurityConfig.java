@@ -28,15 +28,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-
         httpSecurity
                 .csrf()
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/registration").not().fullyAuthenticated()
-                .antMatchers("/appointments/**").permitAll()
-//                .antMatchers("/appointments/**").hasRole("NURSE")
-                .antMatchers("/patients/**", "/doctors/**", "/nurses/**").hasRole("DOCTOR")
+                .antMatchers("/appointments/**").hasAnyRole("DOCTOR", "NURSE")
+                .antMatchers("/patients/**", "/doctors/**", "/nurses/**").hasRole("ADMIN")
                 .antMatchers("/", "/lang", "/resources/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -46,7 +44,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-
                 .defaultSuccessUrl("/")
                 .and()
                 .logout()

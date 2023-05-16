@@ -54,14 +54,21 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <form:label class="text-center"
                                 path="address"><spring:message code="label.address"/>:</form:label>
                 <form:input class="form-control" path="address"
                                 value="${editedNurse.address}"/>
                 <form:errors path="address" cssClass="error"/>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
+                <form:label class="text-center"
+                            path="username"><spring:message code="label.username"/>:</form:label>
+                <form:input class="form-control" path="username"
+                            value="${editedNurse.username}"/>
+                <form:errors path="username" cssClass="error"/>
+            </div>
+            <div class="form-group col-md-4">
                 <form:label class="text-center"
                             path="password"><spring:message code="label.password"/>:</form:label>
                 <form:input class="form-control" path="password"

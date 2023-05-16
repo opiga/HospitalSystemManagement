@@ -16,11 +16,13 @@ public interface AppointmentService {
 
     public List<Appointment> findAll();
 
-    List<Appointment> findAllByHospitalCardId(Long id);
+    List<Appointment> findAllAppointedByHospitalCardId(Long id);
 
     public Appointment findById(Long theId);
 
     public void save(Appointment appointment);
 
     public void deleteById(Long theId);
+
+    public List<Appointment> findAllByHospitalCardId(Long id);
 }

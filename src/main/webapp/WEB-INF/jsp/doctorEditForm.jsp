@@ -32,15 +32,17 @@
                             value="${editedDoctor.lastName}"/>
                 <form:errors path="lastName" cssClass="error"/>
             </div>
-        </div>
 
+        </div>
         <div class="form-row">
-            <div class="form-group col-md-4">
-                <form:label class="text-center" path="email"><spring:message code="label.email"/>:</form:label>
-                <form:input class="form-control" path="email"
-                            value="${editedDoctor.email}"/>
-                <form:errors path="email" cssClass="error"/>
-            </div>
+        <div class="form-group col-md-12">
+            <form:label class="text-center" path="address"><spring:message code="label.address"/>:</form:label>
+            <form:input class="form-control" path="address"
+                        value="${editedDoctor.address}"/>
+            <form:errors path="address" cssClass="error"/>
+        </div>
+        </div>
+        <div class="form-row">
             <div class="form-group col-md-4">
                 <form:label class="text-center"
                             path="dateOfBirth"><spring:message code="label.dateOfBirth"/>:</form:label>
@@ -55,14 +57,21 @@
                             value="${editedDoctor.phoneNumber}"/>
                 <form:errors path="phoneNumber" cssClass="error"/>
             </div>
+
+            <div class="form-group col-md-4">
+                <form:label class="text-center" path="email"><spring:message code="label.email"/>:</form:label>
+                <form:input class="form-control" path="email"
+                            value="${editedDoctor.email}"/>
+                <form:errors path="email" cssClass="error"/>
+            </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-4">
-                <form:label class="text-center" path="address"><spring:message code="label.address"/>:</form:label>
-                <form:input class="form-control" path="address"
-                            value="${editedDoctor.address}"/>
-                <form:errors path="address" cssClass="error"/>
+                <form:label class="text-center" path="username"><spring:message code="label.username"/>:</form:label>
+                <form:input class="form-control" path="username"
+                            value="${editedDoctor.username}"/>
+                <form:errors path="username" cssClass="error"/>
             </div>
             <div class="form-group col-md-4">
                 <form:label class="text-center" path="password"><spring:message code="label.password"/>:</form:label>

@@ -1,7 +1,8 @@
-package com.example.hospitalsystemmanagement.service;
+package com.example.hospitalsystemmanagement.service.serviceImpl;
 
 import com.example.hospitalsystemmanagement.entity.Role;
 import com.example.hospitalsystemmanagement.repository.RoleRepository;
+import com.example.hospitalsystemmanagement.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

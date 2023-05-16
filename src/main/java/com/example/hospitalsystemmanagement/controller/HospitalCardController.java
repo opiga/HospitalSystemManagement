@@ -76,7 +76,7 @@ public class HospitalCardController {
         model.addAttribute("doctors", doctors);
         List<User> nurses = doctorService.findAllNurses();
         model.addAttribute("nurses", nurses);
-        return "hospitalCardForm";
+        return "hospitalCardAddForm";
     }
 
     @PostMapping("/addNewHospitalCard")
@@ -89,7 +89,7 @@ public class HospitalCardController {
             model.addAttribute("doctors", doctors);
             List<User> nurses = doctorService.findAllNurses();
             model.addAttribute("nurses", nurses);
-            return "hospitalCardForm";
+            return "hospitalCardAddForm";
         }
         User findDoctor = doctorService.findById(hospitalCard.getDoctor().getId());
         hospitalCard.setDoctor(findDoctor);
@@ -107,7 +107,7 @@ public class HospitalCardController {
         List<User> doctors = doctorService.findAll();
         theModel.addAttribute("doctors", doctors);
         List<User> nurses = doctorService.findAllNurses();
-        theModel.addAttribute("nurses", doctors);
+        theModel.addAttribute("nurses", nurses);
         return "hospitalCardEditForm";
     }
 

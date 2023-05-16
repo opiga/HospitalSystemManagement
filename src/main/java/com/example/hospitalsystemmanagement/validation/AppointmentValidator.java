@@ -10,6 +10,9 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Created by bonda on 13.05.2023 16:21
  *
@@ -37,5 +40,16 @@ public class AppointmentValidator implements Validator {
         }
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "date", "date.empty", messageSource.getMessage("validation.empty.date", null, LocaleContextHolder.getLocale()));
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nurse", "nurse.empty", messageSource.getMessage("validation.empty.nurse", null, LocaleContextHolder.getLocale()));
+
+
+        String dateString = appointment1.getDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dateString, formatter);
+        LocalDate currentDate = LocalDate.now();
+
+        if (date != null && date.isBefore(currentDate)) {
+            errors.rejectValue("date", "date.invalid",  messageSource.getMessage("validation.date.invalid", null, LocaleContextHolder.getLocale()));
+        }
+
     }
 }

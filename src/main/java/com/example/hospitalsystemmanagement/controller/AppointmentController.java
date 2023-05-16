@@ -74,7 +74,7 @@ public class AppointmentController {
     @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE')")
     @GetMapping("/listAppointments/{hospitalCardId}")
     public String getListAppointmentsForCurrentUser(@PathVariable("hospitalCardId") Long hospitalCardId, Model theModel) {
-        List<Appointment> theAppointments = appointmentService.findAllByHospitalCardId(hospitalCardId);
+        List<Appointment> theAppointments = appointmentService.findAllAppointedByHospitalCardId(hospitalCardId);
         theModel.addAttribute("appointments", theAppointments);
 
 //        List<Appointment> appointments = appointmentService.getAppointmentsByDoctorId(currentUser.getId());
