@@ -14,7 +14,7 @@ import com.example.hospitalsystemmanagement.service.CategoryService;
 import com.example.hospitalsystemmanagement.service.DoctorService;
 import com.example.hospitalsystemmanagement.service.HospitalCardService;
 import com.example.hospitalsystemmanagement.service.PatientService;
-import com.example.hospitalsystemmanagement.validation.NewFormValidator;
+import com.example.hospitalsystemmanagement.validation.HospitalCardValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -38,7 +38,7 @@ public class HospitalCardController {
     private PatientService patientService;
 
     @Autowired
-    private NewFormValidator newFormValidator;
+    private HospitalCardValidator newHospitalCardValidator;
 
     public HospitalCardController(HospitalCardService theHospitalCardService,
                                   CategoryService theCategoryService, DoctorService theDoctorService
@@ -82,7 +82,7 @@ public class HospitalCardController {
     @PostMapping("/addNewHospitalCard")
     public String addHospitalCard(@ModelAttribute("newHospitalCard") HospitalCard hospitalCard, BindingResult result, Model model) {
 
-        newFormValidator.validate(hospitalCard, result);
+        newHospitalCardValidator.validate(hospitalCard, result);
         if (result.hasErrors()) {
             model.addAttribute("newHospitalCard", hospitalCard);
             List<User> doctors = doctorService.findAll();
@@ -115,7 +115,7 @@ public class HospitalCardController {
     public String editHospitalCard(@ModelAttribute("editedHospitalCard")
                                    HospitalCard hospitalCard, BindingResult result,
                                    Model model) {
-        newFormValidator.validate(hospitalCard, result);
+        newHospitalCardValidator.validate(hospitalCard, result);
         if (result.hasErrors()) {
             List<User> doctors = doctorService.findAll();
             model.addAttribute("doctors", doctors);

@@ -29,7 +29,8 @@ public class AppointmentValidator implements Validator {
 
     public void validate(Object target, Errors errors) {
         Appointment appointment1 = (Appointment) target;
-        if (appointment1.getMedications().isEmpty() && appointment1.getOperations().isEmpty() && appointment1.getProcedures().isEmpty()) {
+
+        if (appointment1.getMedications().isEmpty() && appointment1.getProcedures().isEmpty()) {
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "medications", "field.required", messageSource.getMessage("validation.empty.medications", null, LocaleContextHolder.getLocale()));
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "operations", "field.required",  messageSource.getMessage("validation.empty.operations", null, LocaleContextHolder.getLocale()));
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "procedures", "field.required", messageSource.getMessage("validation.empty.procedures", null, LocaleContextHolder.getLocale()));

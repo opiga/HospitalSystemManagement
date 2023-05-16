@@ -12,7 +12,7 @@ import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.repository.PatientWithNumberOpenedHospitalCards;
 import com.example.hospitalsystemmanagement.service.PatientService;
 import com.example.hospitalsystemmanagement.service.RoleService;
-import com.example.hospitalsystemmanagement.validation.NewUserValidator;
+import com.example.hospitalsystemmanagement.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -32,7 +32,7 @@ public class PatientController {
     private RoleService roleService;
 
     @Autowired
-    private NewUserValidator newFormValidator;
+    private UserValidator newFormValidator;
 
     public PatientController(PatientService thePatientService, RoleService theRoleService) {
         patientService = thePatientService;

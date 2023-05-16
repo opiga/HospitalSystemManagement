@@ -153,5 +153,9 @@ User implements UserDetails {
     public String getFullName() {
         return firstName + " " + lastName;
     }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }
 

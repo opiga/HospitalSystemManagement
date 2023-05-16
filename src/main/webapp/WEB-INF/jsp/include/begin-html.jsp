@@ -38,6 +38,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/nurses/list" class="nav-link">
+                            <spring:message code="label.nurses"/>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="${pageContext.request.contextPath}/appointments/list"
                            class="nav-link">
                             <spring:message code="label.hospitalCards"/>

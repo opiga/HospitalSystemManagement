@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
  * @author bonda
  */
 @Component
-public class NewUserValidator implements Validator {
+public class UserValidator implements Validator {
     @Autowired
     private MessageSource messageSource;
 
@@ -61,6 +61,5 @@ public class NewUserValidator implements Validator {
         if (!matcherEmail.matches()) {
             errors.rejectValue("email", "email.invalid", messageSource.getMessage("validation.invalidFormat.email", null, LocaleContextHolder.getLocale()));
         }
-
     }
 }

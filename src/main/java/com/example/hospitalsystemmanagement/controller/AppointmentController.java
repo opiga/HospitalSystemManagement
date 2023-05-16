@@ -1,12 +1,13 @@
 package com.example.hospitalsystemmanagement.controller;
 
-import com.example.hospitalsystemmanagement.entity.*;
+import com.example.hospitalsystemmanagement.entity.Appointment;
+import com.example.hospitalsystemmanagement.entity.HospitalCard;
+import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.service.AppointmentService;
 import com.example.hospitalsystemmanagement.service.DoctorService;
 import com.example.hospitalsystemmanagement.service.HospitalCardService;
 import com.example.hospitalsystemmanagement.service.PatientService;
 import com.example.hospitalsystemmanagement.validation.AppointmentValidator;
-import com.example.hospitalsystemmanagement.validation.NewFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/appointments")
-@PreAuthorize("hasRole('DOCTOR')")
+
 public class AppointmentController {
     private DoctorService doctorService;
     private PatientService patientService;
@@ -34,9 +35,7 @@ public class AppointmentController {
     @Autowired
     private AppointmentValidator appointmentValidator;
 
-    public AppointmentController(PatientService thePatientService, AppointmentService theAppointmentService,
-                                 DoctorService theDoctorService,
-                                 HospitalCardService theHospitalCardService) {
+    public AppointmentController(PatientService thePatientService, AppointmentService theAppointmentService, DoctorService theDoctorService, HospitalCardService theHospitalCardService) {
         hospitalCardService = theHospitalCardService;
         patientService = thePatientService;
         doctorService = theDoctorService;
@@ -56,26 +55,23 @@ public class AppointmentController {
     @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE')")
     @GetMapping("/list")
     public String getHospitalCardsForCurrentUser(@AuthenticationPrincipal User currentUser, Model theModel) {
-        System.out.println("!!!!!!!!!!!");
-        System.out.println(currentUser.getRole());
-        System.out.println(currentUser.getUsername());
-        System.out.println(currentUser.getRole().getId());
 
-        if (currentUser.getRole().getRoleName().contains(RoleType.DOCTOR.toString())) {
+        if (currentUser.getRole().getRoleName().equals("doctor")) {
             List<HospitalCard> theHospitalCards = hospitalCardService.findAllByDoctorId(currentUser.getId());
             theModel.addAttribute("hospitalCards", theHospitalCards);
             theModel.addAttribute("doctor", currentUser);
             return "viewHospitalCardsDoctor";
-        } else if (currentUser.getRole().getRoleName().contains(RoleType.NURSE.toString())) {
+        }
+        else if (currentUser.getRole().getRoleName().equals("nurse")) {
             List<HospitalCard> theHospitalCards = hospitalCardService.findAllByNurseId(currentUser.getId());
             theModel.addAttribute("hospitalCards", theHospitalCards);
             theModel.addAttribute("nurse", currentUser);
             return "viewHospitalCardsNurse";
         }
-        System.out.println("@@@@@@@@@@@");
         return "viewHospitalCardsDoctor";
     }
 
+    @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE')")
     @GetMapping("/listAppointments/{hospitalCardId}")
     public String getListAppointmentsForCurrentUser(@PathVariable("hospitalCardId") Long hospitalCardId, Model theModel) {
         List<Appointment> theAppointments = appointmentService.findAllByHospitalCardId(hospitalCardId);
@@ -86,49 +82,70 @@ public class AppointmentController {
         return "viewAppointments";
     }
 
-    @GetMapping("/addAppointment/{hospitalCardId}/{patientId}/{doctorId}")
-    public String showAddAppointmentForm(@PathVariable("hospitalCardId") Long hospitalCardId,@PathVariable("patientId") Long patientId, @PathVariable("doctorId") Long doctorId,
-                                         Model model) {
+    @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE')")
+    @GetMapping("/addAppointment/{hospitalCardId}/{patientId}/{doctorId}/{nurseId}")
+    public String showAddAppointmentForm(@AuthenticationPrincipal User currentUser, @PathVariable("hospitalCardId") Long hospitalCardId, @PathVariable("patientId") Long patientId, @PathVariable("doctorId") Long doctorId, @PathVariable("nurseId") Long nurseId, Model model) {
         Appointment newAppointment = new Appointment();
-        newAppointment.setDoctor(doctorService.findById(doctorId));
         newAppointment.setPatient(patientService.findById(patientId));
         newAppointment.setHospitalCard(hospitalCardService.findById(hospitalCardId));
-        model.addAttribute("appointment", newAppointment);
-        List<User> nurses = doctorService.findAllNurses();
-        model.addAttribute("nurses", nurses);
-        return "appointmentForm";
+
+        if (currentUser.getRole().getRoleName().equals("doctor")) {
+            newAppointment.setDoctor(doctorService.findById(doctorId));
+            List<User> nurses = doctorService.findAllNurses();
+            model.addAttribute("appointment", newAppointment);
+            model.addAttribute("nurses", nurses);
+            return "appointmentForm";
+        }
+        else {
+            newAppointment.setNurse(doctorService.findById(nurseId));
+            model.addAttribute("appointment", newAppointment);
+            return "appointmentFormNurse";
+        }
     }
 
     @PostMapping("/addAppointment")
-    public String addAppointment(@ModelAttribute("appointment") Appointment appointment, BindingResult result, Model model) {
+    public String addAppointment(@AuthenticationPrincipal User currentUser, @ModelAttribute("appointment") Appointment appointment, BindingResult result, Model model) {
         appointmentValidator.validate(appointment, result);
         if (result.hasErrors()) {
-            List<User> nurses = doctorService.findAllNurses();
-            model.addAttribute("nurses", nurses);
-            return "appointmentForm";
+            if (currentUser.getRole().getRoleName().equals("doctor")) {
+                List<User> nurses = doctorService.findAllNurses();
+                model.addAttribute("nurses", nurses);
+                return "appointmentForm";
+            }
+            else {
+                return "appointmentFormNurse";
+            }
         }
         appointmentService.save(appointment);
         return "redirect:/appointments/list";
     }
+
+
     @GetMapping("/editAppointment/{id}")
-    public String showEditAppointmentForm(@PathVariable("id") Long id, Model model) {
+    public String showEditAppointmentForm(@AuthenticationPrincipal User currentUser, @PathVariable("id") Long id, Model model) {
         Appointment appointment = appointmentService.findById(id);
-        List<User> nurses = doctorService.findAllNurses();
         model.addAttribute("editedAppointment", appointment);
-        model.addAttribute("nurses", nurses);
-        return "appointmentEditForm";
+        if (currentUser.getRole().getRoleName().equals("doctor")) {
+            List<User> nurses = doctorService.findAllNurses();
+            model.addAttribute("nurses", nurses);
+            return "appointmentEditForm";
+        }
+        else {
+            return "appointmentEditFormNurse";
+        }
     }
 
     @PostMapping("/editsave")
-    public String editAppointment(@ModelAttribute("editedAppointment") Appointment appointment,BindingResult result,
-                                  Model model) {
-        appointmentValidator.validate(appointment, result);
-        if (result.hasErrors()) {
-            List<User> doctors = doctorService.findAll();
-            model.addAttribute("doctors", doctors);
-            List<User> nurses = doctorService.findAllNurses();
-            model.addAttribute("nurses", nurses);
-            return "hospitalCardEditForm";
+    public String editAppointment(@AuthenticationPrincipal User currentUser, @ModelAttribute("editedAppointment") Appointment appointment, BindingResult result, Model model) {
+        if (currentUser.getRole().getRoleName().equals("doctor")) {
+            appointmentValidator.validate(appointment, result);
+            if (result.hasErrors()) {
+                List<User> doctors = doctorService.findAll();
+                model.addAttribute("doctors", doctors);
+                List<User> nurses = doctorService.findAllNurses();
+                model.addAttribute("nurses", nurses);
+                return "hospitalCardEditForm";
+            }
         }
 
         appointmentService.save(appointment);

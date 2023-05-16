@@ -1,12 +1,9 @@
 package com.example.hospitalsystemmanagement.controller;
 
-import com.example.hospitalsystemmanagement.entity.Category;
 import com.example.hospitalsystemmanagement.entity.User;
-import com.example.hospitalsystemmanagement.repository.DoctorWithUsers;
-import com.example.hospitalsystemmanagement.service.CategoryService;
-import com.example.hospitalsystemmanagement.service.DoctorService;
+import com.example.hospitalsystemmanagement.service.NurseService;
 import com.example.hospitalsystemmanagement.service.RoleService;
-import com.example.hospitalsystemmanagement.validation.NewUserValidator;
+import com.example.hospitalsystemmanagement.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -26,72 +23,61 @@ import java.util.List;
 @PreAuthorize("hasRole('ADMIN')")
 public class NurseController {
 
-    private DoctorService doctorService;
-    private CategoryService categoryService;
+    private NurseService nurseService;
     private RoleService roleService;
 
     @Autowired
-    private NewUserValidator newFormValidator;
+    private UserValidator newUserValidator;
 
-    public  NurseController(DoctorService theDoctorService, CategoryService categoryService, RoleService roleService) {
-        doctorService = theDoctorService;
+    public NurseController(NurseService theNurseService, RoleService roleService) {
+        nurseService = theNurseService;
         this.roleService = roleService;
     }
 
     @GetMapping("/list")
     public String listNurses(Model theModel) {
-        List<DoctorWithUsers> theDoctors = doctorService.findAllWithPatients();
-        theModel.addAttribute("doctors", theDoctors);
-        return "viewDoctor";
+        List<User> theNurses = nurseService.findAll();
+        theModel.addAttribute("nurses", theNurses);
+        return "viewNurse";
     }
 
-    @GetMapping("/adddoctor")
-    public String showAddDoctorForm(Model model) {
-        List<Category> categories = categoryService.findAll();
-        model.addAttribute("categories", categories);
-        model.addAttribute("doctor", new User());
-        return "doctorForm";
+    @GetMapping("/addNurse")
+    public String showAddNurseForm(Model model) {
+        model.addAttribute("nurse", new User());
+        return "nurseForm";
     }
 
-    @PostMapping("/adddoctoru")
-    public String addDoctor(@ModelAttribute("doctor") User doctor, BindingResult result, Model model) {
-        newFormValidator.validate(doctor, result);
+    @PostMapping("/addNurseU")
+    public String addNurse(@ModelAttribute("nurse") User nurse, BindingResult result, Model model) {
+        newUserValidator.validate(nurse, result);
         if (result.hasErrors()) {
-            List<Category> categories = categoryService.findAll();
-            model.addAttribute("categories", categories);
-            return "doctorForm";
+            return "nurseForm";
         }
-        doctor.setRole(roleService.findById(5L));
-        doctorService.save(doctor);
-        return "redirect:/doctors/list";
+        nurse.setRole(roleService.findByName("nurse"));
+        nurseService.save(nurse);
+        return "redirect:/nurses/list";
     }
 
-    @GetMapping("/editdoctor/{id}")
+    @GetMapping("/editNurse/{id}")
     public String showEditDoctorForm(@PathVariable("id") Long id, Model model) {
-        User doctor = doctorService.findById(id);
-        List<Category> categories = categoryService.findAll();
-        model.addAttribute("editedDoctor", doctor);
-        model.addAttribute("categories", categories);
-        return "doctorEditForm";
+        User nurse = nurseService.findById(id);
+        model.addAttribute("editedNurse", nurse);
+        return "nurseEditForm";
     }
 
-    @PostMapping("/editsave/{id}")
-    public String editDoctor(@PathVariable("id") Long id, @ModelAttribute("editedDoctor") User doctor,BindingResult result,Model model) {
-        newFormValidator.validate(doctor, result);
+    @PostMapping("/editSave")
+    public String editDoctor(@ModelAttribute("editedNurse") User nurse, BindingResult result) {
+        newUserValidator.validate(nurse, result);
         if (result.hasErrors()) {
-            List<Category> categories = categoryService.findAll();
-            model.addAttribute("categories", categories);
-            return "doctorEditForm";
+            return "nurseEditForm";
         }
-        Category category = categoryService.findById(doctor.getCategory().getCategoryId());
-        doctor.setCategory(category);
-        doctorService.save(doctor);
-        return "redirect:/doctors/list";
+        nurseService.save(nurse);
+        return "redirect:/nurses/list";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable Long id) {
-        doctorService.deleteById(id);
-        return "redirect:/doctors/list";
+        nurseService.deleteById(id);
+        return "redirect:/nurses/list";
     }
 }

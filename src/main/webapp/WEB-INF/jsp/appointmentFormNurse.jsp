@@ -15,7 +15,7 @@
         <div class="form-row">
             <div class="form-group col-md-12">
                 <form:hidden path="patient"/>
-               <form:hidden path="doctor"/>
+                <form:hidden path="nurse"/>
                 <form:hidden path="hospitalCard"/>
                 <form:hidden path="status" value="appointed"/>
             </div>

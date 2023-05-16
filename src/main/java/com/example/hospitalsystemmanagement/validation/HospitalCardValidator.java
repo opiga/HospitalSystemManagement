@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  * @author bonda
  */
 @Component
-public class NewFormValidator implements Validator {
+public class HospitalCardValidator implements Validator {
     @Autowired
     private MessageSource messageSource;
 

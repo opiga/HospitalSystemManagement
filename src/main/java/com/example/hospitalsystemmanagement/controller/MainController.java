@@ -27,4 +27,8 @@ public class MainController {
         String referer = request.getHeader("referer");
         return "redirect:" + referer;
     }
+    @RequestMapping("/accessDenied")
+    public String accessDenied() {
+        return "accessDenied";
+    }
 }

@@ -18,7 +18,7 @@
         <thead>
         <tr>
             <%--            <th class="text-center">id--%>
-            <th class="text-center"><spring:message code="label.patient"/>
+             <th class="text-center"><spring:message code="label.patient"/>
             <th class="text-center"><spring:message code="label.pDiagnosis"/>
             <th class="text-center"><spring:message code="label.cDiagnosis"/>
             <th class="text-center"><spring:message code="label.fDiagnosis"/>
@@ -35,7 +35,7 @@
             <td>${hospitalCard.discharged}
             <td class="text-center">
                 <a class="btn btn-light"
-                   href="${pageContext.request.contextPath}/appointments/addAppointment/${hospitalCard.hospitalCardId}/${hospitalCard.patient.id}/${hospitalCard.doctor.id}"><spring:message code="label.makeAppointment"/></a>
+                   href="${pageContext.request.contextPath}/appointments/addAppointment/${hospitalCard.hospitalCardId}/${hospitalCard.patient.id}/${hospitalCard.doctor.id}/${hospitalCard.nurse.id}"><spring:message code="label.makeAppointment"/></a>
                 <a class="btn btn-light"
                    href="${pageContext.request.contextPath}/appointments/listAppointments/${hospitalCard.hospitalCardId}"><spring:message code="label.viewAppointment"/></a>
                 </c:forEach>

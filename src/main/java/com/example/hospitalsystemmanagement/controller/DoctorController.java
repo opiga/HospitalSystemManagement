@@ -6,7 +6,7 @@ import com.example.hospitalsystemmanagement.repository.DoctorWithUsers;
 import com.example.hospitalsystemmanagement.service.CategoryService;
 import com.example.hospitalsystemmanagement.service.DoctorService;
 import com.example.hospitalsystemmanagement.service.RoleService;
-import com.example.hospitalsystemmanagement.validation.NewUserValidator;
+import com.example.hospitalsystemmanagement.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class DoctorController {
     private RoleService roleService;
 
     @Autowired
-    private NewUserValidator newFormValidator;
+    private UserValidator newFormValidator;
 
     public DoctorController(DoctorService theDoctorService, CategoryService categoryService, RoleService roleService) {
         doctorService = theDoctorService;

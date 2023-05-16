@@ -40,7 +40,7 @@
                href="${pageContext.request.contextPath}/appointments/editAppointment/${appointment.id}">Edit</a>
 
             <a class="btn btn-light"
-               href="${pageContext.request.contextPath}/appointments/addAppointment/${appointment.hospitalCard.hospitalCardId}/${appointment.patient.id}/${appointment.doctor.id}"><spring:message code="label.makeAppointment"/></a>
+               href="${pageContext.request.contextPath}/appointments/addAppointment/${appointment.hospitalCard.hospitalCardId}/${appointment.patient.id}/${appointment.doctor.id}/${appointment.nurse.id}"><spring:message code="label.makeAppointment"/></a>
 <%--                <c:if test="${patient.number_Of_Hospital_Cards == 0}">--%>
 <%--                <a class="btn btn-light"--%>
 <%--                   href="${pageContext.request.contextPath}/hospitalcards/addhospitalcard/${patient.id}">--%>
