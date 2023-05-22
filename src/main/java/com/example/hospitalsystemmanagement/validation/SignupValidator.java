@@ -11,7 +11,6 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,11 +21,16 @@ import java.util.regex.Pattern;
  */
 @Component
 public class SignupValidator implements Validator {
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    //
+//
+    public SignupValidator(MessageSource messageSource,UserService userService) {
+        this.userService = userService;
+        this.messageSource = messageSource;
+    }
 
     public boolean supports(Class<?> clazz) {
         return User.class.isAssignableFrom(clazz);
@@ -40,8 +44,8 @@ public class SignupValidator implements Validator {
 
 
         LocalDate currentDate = LocalDate.now();
-        if ( signupUser.getDateOfBirth()!=null&&signupUser.getDateOfBirth().isAfter(currentDate)) {
-            errors.rejectValue("dateOfBirth", "dateOfBirth.invalid",  messageSource.getMessage("validation.dateOfBirth.invalid", null, LocaleContextHolder.getLocale()));
+        if (signupUser.getDateOfBirth() != null && signupUser.getDateOfBirth().isAfter(currentDate)) {
+            errors.rejectValue("dateOfBirth", "dateOfBirth.invalid", messageSource.getMessage("validation.dateOfBirth.invalid", null, LocaleContextHolder.getLocale()));
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "address.empty", messageSource.getMessage("validation.empty.address", null, LocaleContextHolder.getLocale()));
@@ -71,7 +75,7 @@ public class SignupValidator implements Validator {
             errors.rejectValue("username", "username.tooLong", messageSource.getMessage("validation.moreCharacters.userName", null, LocaleContextHolder.getLocale()));
         }
         System.out.println(userService.loadUserByUsername(username));
-        if (userService.loadUserByUsername(username)!=null) {
+        if (userService.loadUserByUsername(username) != null) {
             errors.rejectValue("username", "username", messageSource.getMessage("validation.exists.userName", null, LocaleContextHolder.getLocale()));
         }
         Pattern patternPassword = Pattern.compile("(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}");

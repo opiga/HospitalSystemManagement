@@ -19,7 +19,9 @@ import java.util.Optional;
  */
 @Service
 public class DoctorServiceImpl implements DoctorService {
-    private DoctorRepository doctorRepository;
+
+    private final DoctorRepository doctorRepository;
+
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -61,6 +63,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void save(User theDoctor) {
+        System.out.println(theDoctor);
         theDoctor.setPassword(bCryptPasswordEncoder.encode(theDoctor.getPassword()));
         doctorRepository.save(theDoctor);
     }

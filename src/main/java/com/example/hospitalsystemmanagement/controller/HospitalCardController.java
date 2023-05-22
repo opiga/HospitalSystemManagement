@@ -84,6 +84,7 @@ public class HospitalCardController {
 
         newHospitalCardValidator.validate(hospitalCard, result);
         if (result.hasErrors()) {
+
             model.addAttribute("newHospitalCard", hospitalCard);
             List<User> doctors = doctorService.findAll();
             model.addAttribute("doctors", doctors);
@@ -91,9 +92,11 @@ public class HospitalCardController {
             model.addAttribute("nurses", nurses);
             return "hospitalCardAddForm";
         }
+
         User findDoctor = doctorService.findById(hospitalCard.getDoctor().getId());
         hospitalCard.setDoctor(findDoctor);
         hospitalCardService.save(hospitalCard);
+
         return "redirect:/hospitalcards/list/" + hospitalCard.getPatient().getId();
     }
 
@@ -123,7 +126,6 @@ public class HospitalCardController {
             model.addAttribute("nurses", nurses);
             return "hospitalCardEditForm";
         }
-
         User findDoctor = doctorService.findById(hospitalCard.getDoctor().getId());
         User findNurse = doctorService.findById(hospitalCard.getNurse().getId());
         hospitalCard.setDoctor(findDoctor);

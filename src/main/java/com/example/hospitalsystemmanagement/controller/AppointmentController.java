@@ -42,20 +42,11 @@ public class AppointmentController {
         appointmentService = theAppointmentService;
     }
 
-//    @GetMapping("/list")
-//    public String getHospitalCardsForCurrentUser(@AuthenticationPrincipal User currentUser, Model theModel) {
-//        List<HospitalCard> theHospitalCards = hospitalCardService.findAllByDoctorId(currentUser.getId());
-//        theModel.addAttribute("hospitalCards", theHospitalCards);
-//        theModel.addAttribute("doctor", currentUser);
-////        List<Appointment> appointments = appointmentService.getAppointmentsByDoctorId(currentUser.getId());
-////        model.addAttribute("appointments", appointments);
-//        return "viewHospitalCardsDoctor";
-//    }
+
 
     @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE')")
     @GetMapping("/list")
     public String getHospitalCardsForCurrentUser(@AuthenticationPrincipal User currentUser, Model theModel) {
-
         if (currentUser.getRole().getRoleName().equals("doctor")) {
             List<HospitalCard> theHospitalCards = hospitalCardService.findAllByDoctorId(currentUser.getId());
             theModel.addAttribute("hospitalCards", theHospitalCards);

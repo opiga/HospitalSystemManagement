@@ -33,13 +33,12 @@ public class LoginController {
     @PostMapping
     public String processSignup(@ModelAttribute("loginForm") User signupForm, BindingResult result) {
         if (result.hasErrors()) {
-            System.out.println("!!!!!!!!");
             return "login";
         }
         if (!userService.saveUser(signupForm)) {
-            System.out.println("##########");
             return "login";
         }
+        System.out.println("#########################");
         return "index";
     }
 }

@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
-        return new CustomAccessDeniedHandler(); // Create a custom access denied handler
+        return new CustomAccessDeniedHandler();
     }
 
     @Autowired

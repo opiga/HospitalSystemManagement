@@ -40,6 +40,7 @@ public class DoctorController {
         this.roleService = roleService;
     }
 
+
     @GetMapping("/list")
     public String listDoctors(Model theModel) {
         List<DoctorWithUsers> theDoctors = doctorService.findAllWithPatients();

@@ -17,7 +17,7 @@ import java.util.Optional;
  * @author bonda
  */
 @Service
-public class HospitalCardServiceImpl implements HospitalCardService {
+public class   HospitalCardServiceImpl implements HospitalCardService {
 
     private HospitalCardRepository hospitalCardRepository;
 
