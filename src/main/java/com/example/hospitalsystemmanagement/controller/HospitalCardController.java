@@ -120,7 +120,7 @@ public class HospitalCardController {
         User findDoctor = doctorService.findById(hospitalCard.getDoctor().getId());
         User findNurse = doctorService.findById(hospitalCard.getNurse().getId());
         hospitalCard.setDoctor(findDoctor);
-        hospitalCard.setDoctor(findNurse);
+        hospitalCard.setNurse(findNurse);
         hospitalCardService.save(hospitalCard);
         return "redirect:/hospitalcards/list/" + hospitalCard.getPatient().getId();
     }
