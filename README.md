@@ -1,19 +1,31 @@
-Final project hospitalSystemManagement
-Roles: administrator,doctor, nurse, patient.
+# Final project: Hospital System Management 
 
-Administrator functions: 
-register patients, doctors and nurses.
-assign a doctor and nurse to a patient.
+The application provides basic functionality in Hospital System Management. It has 4 roles: administrator, doctor, nurse, patient. Each role has it's own functionality (see below).
 
-Doctor functions:
-has access to a list of Hospital Cards
-makes a diagnosis
-makes appointments to the patient,which are recorded in the Hospital Card.
+### Administrator functions: 
+* Can register patients, doctors and nurses.
+* Can assign a doctor and nurse to a patient.
 
-Nurse functions: makes appointments to the patient.
+### Doctor functions:
+* Doctor has an access to the list of Hospital Cards
+* Make a diagnosis
+* Make appointments to the patient, which are recorded in the Hospital Card.
 
-Credantials:
+### Nurse functions: 
+* See a list of appointments.
+* Make appointments to the patient.
+* Edit patient appointments.
 
-final project hospitalSystemManagement  http://localhost:8080/ admin login: admin123 password: 123Qwe@
-doctor login: doctor password: 258Q@!
-nurse login: nurse password: Qwe!123
+### Patiant functions: 
+* Can create account.
+* Can fill the registration form.
+* Can see the main page after signing in. 
+
+**URL:** 
+http://localhost:8080/ 
+
+**Credantials:**
+
+* **Admin login**: admin123 **password**: 123Qwe@
+* **Doctor login**: doctor **password**: 258Q@!
+* **Nurse login**: nurse **password**: Qwe!123
