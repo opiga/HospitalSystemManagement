@@ -4,7 +4,6 @@ import com.example.hospitalsystemmanagement.entity.Appointment;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -19,18 +18,10 @@ import java.time.format.DateTimeFormatter;
  */
 @Component
 public class AppointmentValidator implements Validator {
-//    @Autowired
-//    private MessageSource messageSource;
-
-
     private final MessageSource messageSource;
-
-    //
-//
     public AppointmentValidator(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
-
 
     public boolean supports(Class<?> clazz) {
         return Appointment.class.isAssignableFrom(clazz);
@@ -43,7 +34,6 @@ public class AppointmentValidator implements Validator {
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "operations", "field.required", messageSource.getMessage("validation.empty.operations", null, LocaleContextHolder.getLocale()));
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "procedures", "field.required", messageSource.getMessage("validation.empty.procedures", null, LocaleContextHolder.getLocale()));
         }
-
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "date", "date.empty", messageSource.getMessage("validation.empty.date", null, LocaleContextHolder.getLocale()));
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nurse", "nurse.empty", messageSource.getMessage("validation.empty.nurse", null, LocaleContextHolder.getLocale()));
         String dateString = appointment1.getDate();
@@ -53,6 +43,5 @@ public class AppointmentValidator implements Validator {
         if (date != null && date.isBefore(currentDate)) {
             errors.rejectValue("date", "date.invalid", messageSource.getMessage("validation.date.invalid", null, LocaleContextHolder.getLocale()));
         }
-
     }
 }

@@ -1,8 +1,8 @@
 package com.example.hospitalsystemmanagement.entity;
 
-import javax.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 
 /**
  * Created by bonda on 13.04.2023 13:24
@@ -37,11 +37,11 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "patient_Id_Appoint")
     User patient;
-//
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nurse_Id")
     private User nurse;
-//
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_Id_Appoint")
     private User doctor;
@@ -49,5 +49,4 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hospital_Card_Id")
     private HospitalCard hospitalCard;
-
 }

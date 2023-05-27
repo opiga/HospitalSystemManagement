@@ -25,7 +25,6 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/appointments")
-
 public class AppointmentController {
     private DoctorService doctorService;
     private PatientService patientService;
@@ -41,8 +40,6 @@ public class AppointmentController {
         doctorService = theDoctorService;
         appointmentService = theAppointmentService;
     }
-
-
 
     @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE')")
     @GetMapping("/list")
@@ -67,9 +64,6 @@ public class AppointmentController {
     public String getListAppointmentsForCurrentUser(@PathVariable("hospitalCardId") Long hospitalCardId, Model theModel) {
         List<Appointment> theAppointments = appointmentService.findAllAppointedByHospitalCardId(hospitalCardId);
         theModel.addAttribute("appointments", theAppointments);
-
-//        List<Appointment> appointments = appointmentService.getAppointmentsByDoctorId(currentUser.getId());
-//        model.addAttribute("appointments", appointments);
         return "viewAppointments";
     }
 
@@ -138,7 +132,6 @@ public class AppointmentController {
                 return "hospitalCardEditForm";
             }
         }
-
         appointmentService.save(appointment);
         return "redirect:/appointments/list";
     }

@@ -10,7 +10,6 @@ import javax.persistence.*;
  *
  * @author bonda
  */
-
 @Entity
 @Table(name = "roles")
 @AllArgsConstructor

@@ -1,4 +1,5 @@
 package com.example.hospitalsystemmanagement.service.serviceImpl;
+
 import com.example.hospitalsystemmanagement.entity.Appointment;
 import com.example.hospitalsystemmanagement.repository.AppointmentRepository;
 import com.example.hospitalsystemmanagement.service.AppointmentService;
@@ -28,11 +29,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<Appointment> findAllAppointedByHospitalCardId(Long id){
+    public List<Appointment> findAllAppointedByHospitalCardId(Long id) {
         return appointmentRepository.findAllAppointedByHospitalCardId(id);
     }
+
     @Override
-    public List<Appointment> findAllByHospitalCardId(Long id){
+    public List<Appointment> findAllByHospitalCardId(Long id) {
         return appointmentRepository.findAllByHospitalCardId(id);
     }
 

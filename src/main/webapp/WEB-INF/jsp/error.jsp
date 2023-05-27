@@ -8,7 +8,9 @@
         <h1 class="display-1 fw-bold">404</h1>
         <p class="fs-3"><span class="text-danger">Opps!</span>
             <spring:message code="label.pageNotFound"/>.</p>
-        <a href="${pageContext.request.contextPath}/" class="btn btn-secondary"><spring:message code="label.homePage"/></a>
+        <a href="${pageContext.request.contextPath}/" class="btn btn-secondary">
+            <spring:message code="label.homePage"/>
+        </a>
     </div>
 </div>
 <%@ include file="include/end-html.jsp" %>

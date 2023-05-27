@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="include/begin-html.jsp" %>
+
 <link href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css
       rel=stylesheet>
 <link href=https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/css/dataTables.bootstrap4.min.css
@@ -18,9 +19,7 @@
             <th class="text-center"><spring:message code="label.email"/>
             <th class="text-center"><spring:message code="label.phoneNumber"/>
             <th class="text-center"><spring:message code="label.address"/>
-                <%--            <th class="text-center">Opened Cards--%>
             <th class="text-center"><spring:message code="label.actions"/>
-
         <tbody>
         <c:forEach var="patient" items="${patients}">
         <tr>
@@ -30,10 +29,11 @@
             <td>${patient.email}
             <td>${patient.phone_Number}
             <td>${patient.address}
-                    <%--            <td>${patient.number_Of_Hospital_Cards}--%>
-            <td class="text-center"><a class="btn btn-light"
-                                       href="${pageContext.request.contextPath}/patients/editpatient/${patient.id}"><spring:message code="label.edit"/></a>
-
+            <td class="text-center">
+                <a class="btn btn-light"
+                   href="${pageContext.request.contextPath}/patients/editpatient/${patient.id}"><spring:message
+                        code="label.edit"/>
+                </a>
                 <c:if test="${patient.number_Of_Hospital_Cards == 0}">
                 <a class="btn btn-light"
                    href="${pageContext.request.contextPath}/hospitalcards/addhospitalcard/${patient.id}">
@@ -45,11 +45,11 @@
                     <spring:message code="label.openCards"/>
                 </a>
                 </c:if>
-
-                </c:forEach>
+        </c:forEach>
     </table>
     <br>
-    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/patients/addpatient"> <spring:message code="label.addPatient"/></a>
+    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/patients/addpatient">
+        <spring:message code="label.addPatient"/></a>
 </div>
 <br>
 <br>

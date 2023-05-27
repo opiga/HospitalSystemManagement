@@ -3,7 +3,6 @@ package com.example.hospitalsystemmanagement.service;
 import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.repository.PatientWithHospitalCardAndDoctor;
 import com.example.hospitalsystemmanagement.repository.PatientWithNumberOpenedHospitalCards;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

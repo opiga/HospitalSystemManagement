@@ -1,7 +1,7 @@
 package com.example.hospitalsystemmanagement.service.serviceImpl;
 
-import com.example.hospitalsystemmanagement.repository.CategoryRepository;
 import com.example.hospitalsystemmanagement.entity.Category;
+import com.example.hospitalsystemmanagement.repository.CategoryRepository;
 import com.example.hospitalsystemmanagement.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

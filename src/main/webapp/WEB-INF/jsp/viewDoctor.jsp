@@ -12,8 +12,6 @@
            id=example>
         <thead>
         <tr>
-
-<%--            <th class="text-center">id--%>
             <th class="text-center"><spring:message code="label.firstName"/>
             <th class="text-center"><spring:message code="label.lastName"/>
             <th class="text-center"><spring:message code="label.email"/>
@@ -24,23 +22,30 @@
         <tbody>
         <c:forEach var="doctor" items="${doctors}">
         <tr>
-<%--            <td>${doctor.id}</td>--%>
             <td>${doctor.first_Name}</td>
             <td>${doctor.last_Name}</td>
             <td>${doctor.email}</td>
             <td>${doctor.phone_Number}</td>
             <td>${doctor.name_Category}</td>
             <td>${doctor.number_Of_Patients}</td>
-
-        <td><a class="btn btn-light"
-               href="${pageContext.request.contextPath}/doctors/editdoctor/${doctor.id}"><spring:message code="label.edit"/></a>
-            <a class="btn btn-light"
-               href="${pageContext.request.contextPath}/doctors/delete/${doctor.id}"><spring:message code="label.delete"/></a>
-            </c:forEach>
+            <td>
+                <a class="btn btn-light"
+                   href="${pageContext.request.contextPath}/doctors/editdoctor/${doctor.id}">
+                    <spring:message code="label.edit"/>
+                </a>
+                <a class="btn btn-light"
+                   href="${pageContext.request.contextPath}/doctors/delete/${doctor.id}">
+                    <spring:message code="label.delete"/></a>
+            </td>
+        </tr>
+        </c:forEach>
 
     </table>
     <br>
-    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/doctors/adddoctor"><spring:message code="label.addDoctor"/></a>
+    <a class="btn btn-secondary"
+       href="${pageContext.request.contextPath}/doctors/adddoctor">
+        <spring:message code="label.addDoctor"/>
+    </a>
 </div>
 <br>
 <br>

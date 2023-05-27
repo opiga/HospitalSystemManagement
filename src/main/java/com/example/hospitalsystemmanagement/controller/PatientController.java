@@ -22,15 +22,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+/**
+ * Created by bonda on 17.04.2023 14:42
+ *
+ * @author bonda
+ */
 @Controller
 @PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/patients")
 public class PatientController {
-
     private PatientService patientService;
     private RoleService roleService;
-
     @Autowired
     private UserValidator newFormValidator;
 
@@ -75,11 +77,4 @@ public class PatientController {
         patientService.save(patient);
         return "redirect:/patients/list";
     }
-
-//    @GetMapping(value = "/delete/{id}")
-//    public String delete(@PathVariable Long id) {
-//        patientService.deleteById(id);
-//        return "redirect:/patients/list";
-//    }
-
 }

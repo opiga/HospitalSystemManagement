@@ -27,6 +27,7 @@
 
             <div class="collapse navbar-collapse" id="exCollapsingNavbar">
                 <ul class="nav navbar-nav">
+                    <% if (request.isUserInRole("ROLE_ADMIN")) { %>
                     <li class="nav-item">
                         <a href="${pageContext.request.contextPath}/patients/list" class="nav-link">
                             <spring:message code="label.patients"/>
@@ -42,23 +43,27 @@
                             <spring:message code="label.nurses"/>
                         </a>
                     </li>
+                    <% }%>
+                    <% if (request.isUserInRole("ROLE_DOCTOR") || request.isUserInRole("ROLE_NURSE")) { %>
                     <li class="nav-item">
                         <a href="${pageContext.request.contextPath}/appointments/list"
                            class="nav-link">
                             <spring:message code="label.hospitalCards"/>
                         </a>
                     </li>
+                    <% }%>
                 </ul>
-
 
                 <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                     <% if (request.getUserPrincipal() != null) { %>
                     <li class=" nav-item order-2 order-md-1 ">
-                            <span class="navbar-text text-white mx-3"><spring:message code="label.welcome"/>, <%= request.getUserPrincipal().getName()%> !</span>
+                        <span class="navbar-text text-white mx-3"><spring:message
+                                code="label.welcome"/>, <%= request.getUserPrincipal().getName()%> !</span>
                     </li>
                     <li class="nav-item order-2">
                         <form method="POST" action="/logout" class="form-inline">
-                            <button type="submit" class="btn btn-dark"><spring:message code="label.logOut"/></button>
+                            <button type="submit" class="btn btn-dark"><spring:message
+                                    code="label.logOut"/></button>
                         </form>
                     </li>
                     <% }
@@ -71,7 +76,6 @@
                     </form>
                     <% } %>
                 </ul>
-
 
             </div>
             <div class="dropdown">

@@ -1,9 +1,9 @@
 package com.example.hospitalsystemmanagement.service;
 
-import com.example.hospitalsystemmanagement.repository.RoleRepository;
-import com.example.hospitalsystemmanagement.repository.UserRepository;
 import com.example.hospitalsystemmanagement.entity.Role;
 import com.example.hospitalsystemmanagement.entity.User;
+import com.example.hospitalsystemmanagement.repository.RoleRepository;
+import com.example.hospitalsystemmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -31,7 +31,7 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
-//            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("User not found");
         }
         return user;
     }

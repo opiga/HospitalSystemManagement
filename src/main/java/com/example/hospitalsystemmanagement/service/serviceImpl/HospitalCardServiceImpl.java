@@ -1,8 +1,6 @@
 package com.example.hospitalsystemmanagement.service.serviceImpl;
 
 import com.example.hospitalsystemmanagement.entity.HospitalCard;
-import com.example.hospitalsystemmanagement.entity.Role;
-import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.repository.HospitalCardRepository;
 import com.example.hospitalsystemmanagement.service.HospitalCardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import java.util.Optional;
  */
 @Service
 public class   HospitalCardServiceImpl implements HospitalCardService {
-
     private HospitalCardRepository hospitalCardRepository;
 
     @Autowired

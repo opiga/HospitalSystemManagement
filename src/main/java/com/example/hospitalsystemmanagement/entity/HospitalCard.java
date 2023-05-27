@@ -1,7 +1,6 @@
 package com.example.hospitalsystemmanagement.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.List;

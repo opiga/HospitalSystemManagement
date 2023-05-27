@@ -1,9 +1,6 @@
 package com.example.hospitalsystemmanagement.service;
 
 import com.example.hospitalsystemmanagement.entity.User;
-import com.example.hospitalsystemmanagement.repository.DoctorWithUsers;
-import com.example.hospitalsystemmanagement.repository.PatientWithHospitalCardAndDoctor;
-import com.example.hospitalsystemmanagement.repository.PatientWithNumberOpenedHospitalCards;
 
 import java.util.List;
 

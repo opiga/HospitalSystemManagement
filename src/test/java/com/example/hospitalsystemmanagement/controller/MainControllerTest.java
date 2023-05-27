@@ -22,10 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 public class MainControllerTest {
-
     @InjectMocks
     private MainController mainController;
-
     private MockMvc mockMvc;
 
     @Before
@@ -62,7 +60,6 @@ public class MainControllerTest {
                .andExpect(redirectedUrl("http://example.com?lang=en"))
                .andExpect(model().attributeExists("lang"));
     }
-
 }
 
 

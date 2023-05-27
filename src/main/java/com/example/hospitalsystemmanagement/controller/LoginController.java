@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-
     @Autowired
     private UserService userService;
 
@@ -38,7 +37,6 @@ public class LoginController {
         if (!userService.saveUser(signupForm)) {
             return "login";
         }
-        System.out.println("#########################");
         return "index";
     }
 }

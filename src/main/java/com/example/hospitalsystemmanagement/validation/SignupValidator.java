@@ -2,7 +2,6 @@ package com.example.hospitalsystemmanagement.validation;
 
 import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
@@ -22,12 +21,9 @@ import java.util.regex.Pattern;
 @Component
 public class SignupValidator implements Validator {
     private final MessageSource messageSource;
-
     private final UserService userService;
 
-    //
-//
-    public SignupValidator(MessageSource messageSource,UserService userService) {
+    public SignupValidator(MessageSource messageSource, UserService userService) {
         this.userService = userService;
         this.messageSource = messageSource;
     }
@@ -74,7 +70,6 @@ public class SignupValidator implements Validator {
         if ((username.length()) > 15) {
             errors.rejectValue("username", "username.tooLong", messageSource.getMessage("validation.moreCharacters.userName", null, LocaleContextHolder.getLocale()));
         }
-        System.out.println(userService.loadUserByUsername(username));
         if (userService.loadUserByUsername(username) != null) {
             errors.rejectValue("username", "username", messageSource.getMessage("validation.exists.userName", null, LocaleContextHolder.getLocale()));
         }

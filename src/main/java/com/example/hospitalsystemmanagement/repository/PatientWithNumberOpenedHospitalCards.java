@@ -23,5 +23,4 @@ public interface PatientWithNumberOpenedHospitalCards {
     String getAddress();
 
     Integer getNumber_Of_Hospital_Cards();
-
 }

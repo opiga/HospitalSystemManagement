@@ -13,13 +13,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
+/**
+ * Created by bonda on 16.04.2023 20:02
+ *
+ * @author bonda
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserService userService;
-
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

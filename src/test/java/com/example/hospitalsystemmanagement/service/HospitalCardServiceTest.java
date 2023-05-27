@@ -25,13 +25,10 @@ import static org.mockito.Mockito.*;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class HospitalCardServiceTest {
-
     @InjectMocks
     private HospitalCardServiceImpl hospitalCardService;
-
     @Mock
     private HospitalCardRepository hospitalCardRepository;
-
     private HospitalCard hospitalCard;
     private HospitalCard hospitalCard2;
 
@@ -43,7 +40,6 @@ public class HospitalCardServiceTest {
         hospitalCard2 = new HospitalCard();
         hospitalCard2.setHospitalCardId(2L);
         hospitalCard2.setPreliminaryDiagnosis("Bronhit");
-
     }
 
     @Test
@@ -56,16 +52,13 @@ public class HospitalCardServiceTest {
         hospitalCard2.setPatient(patient);
         listHospitalCards.add(hospitalCard);
         listHospitalCards.add(hospitalCard2);
-
         when(hospitalCardRepository.findAllByPatientId(patient.getId())).thenReturn(listHospitalCards);
         List<HospitalCard> result = hospitalCardService.findAllByPatientId(patient.getId());
-
         // Assert the expected results
         assertEquals(2, result.size());
         assertEquals(patient.getId(), result.get(0).getPatient().getId());
         assertEquals(patient.getId(), result.get(1).getPatient().getId());
         verify(hospitalCardRepository, times(1)).findAllByPatientId(patient.getId());
-
     }
 
     @Test

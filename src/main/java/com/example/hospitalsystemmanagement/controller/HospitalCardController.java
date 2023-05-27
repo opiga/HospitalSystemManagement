@@ -1,13 +1,5 @@
 package com.example.hospitalsystemmanagement.controller;
 
-
-/**
- * Created by bonda on 07.04.2023 10:34
- *
- * @author bonda
- */
-
-
 import com.example.hospitalsystemmanagement.entity.HospitalCard;
 import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.service.CategoryService;
@@ -26,17 +18,19 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 
-
+/**
+ * Created by bonda on 07.04.2023 10:34
+ *
+ * @author bonda
+ */
 @Controller
 @PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/hospitalcards")
 public class HospitalCardController {
-
     private HospitalCardService hospitalCardService;
     private CategoryService categoryService;
     private DoctorService doctorService;
     private PatientService patientService;
-
     @Autowired
     private HospitalCardValidator newHospitalCardValidator;
 
@@ -104,9 +98,6 @@ public class HospitalCardController {
     public String edit(@PathVariable("id") Long hospitalCardId, Model theModel) {
         HospitalCard hospitalCard = hospitalCardService.findById(hospitalCardId);
         theModel.addAttribute("editedHospitalCard", hospitalCard);
-
-//        List<Category> categories = categoryService.findAll();
-//        theModel.addAttribute("categories", categories);
         List<User> doctors = doctorService.findAll();
         theModel.addAttribute("doctors", doctors);
         List<User> nurses = doctorService.findAllNurses();

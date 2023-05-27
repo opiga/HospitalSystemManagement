@@ -35,6 +35,4 @@ public interface PatientWithHospitalCardAndDoctor {
     String getDoctor_Last_Name();
 
     String getDoctor_Name_Category();
-
-
 }

@@ -40,7 +40,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 public class DoctorControllerTest {
-
     @Autowired
     protected WebApplicationContext context;
     @Mock
@@ -49,16 +48,13 @@ public class DoctorControllerTest {
     private CategoryService categoryService;
     @Mock
     private RoleService roleService;
-
     @InjectMocks
     private DoctorController doctorController;
-
     private MockMvc mockMvc;
-
     @MockBean
     private UserValidator newFormValidator;
     private Category category;
-    private  Category category2;
+    private Category category2;
     private User doctor;
 
 
@@ -77,7 +73,7 @@ public class DoctorControllerTest {
         category = new Category();
         category.setCategoryId(1L);
         category.setNameCategory("doctorcategory1");
-        category2= new Category();
+        category2 = new Category();
         category2.setCategoryId(2L);
         category2.setNameCategory("doctorcategory2");
         category.setCategoryId(1L);
@@ -118,7 +114,6 @@ public class DoctorControllerTest {
                .andExpect(redirectedUrl("/doctors/list"));
     }
 
-
     @Test
     public void testShowEditDoctorForm() throws Exception {
         List<Category> categories = Arrays.asList(
@@ -127,13 +122,14 @@ public class DoctorControllerTest {
         when(doctorService.findById(doctor.getId())).thenReturn(doctor);
         when(categoryService.findAll()).thenReturn(categories);
 
-        mockMvc.perform(get("/doctors/editdoctor/{id}",doctor.getId()))
+        mockMvc.perform(get("/doctors/editdoctor/{id}", doctor.getId()))
                .andExpect(status().isOk())
                .andExpect(view().name("doctorEditForm"))
                .andExpect(model().attributeExists("editedDoctor"))
                .andExpect(model().attributeExists("categories"))
                .andReturn();
     }
+
     @Test
     public void testEditDoctor() throws Exception {
         BindingResult result = mock(BindingResult.class);
@@ -151,7 +147,6 @@ public class DoctorControllerTest {
 
         verify(doctorService, times(1)).save(doctor);
     }
-
 }
 
 

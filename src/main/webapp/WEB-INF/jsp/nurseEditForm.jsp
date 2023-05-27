@@ -9,7 +9,6 @@
 </div>
 
 <div class="container">
-    
     <%--@elvariable id="editedNurse" type=""--%>
     <form:form action="${pageContext.request.contextPath}/nurses/editSave" method="post"
                modelAttribute="editedNurse">
@@ -17,14 +16,17 @@
         <form:hidden path="role"/>
         <div class="form-row">
             <div class="form-group col-md-6">
-                   <form:label class="text-center"
-                                    path="firstName"><spring:message code="label.firstName"/>:</form:label>
-                   <form:input class="form-control" path="firstName"
-                                    value="${editedNurse.firstName}"/>
+                <form:label class="text-center" path="firstName">
+                    <spring:message code="label.firstName"/>:
+                </form:label>
+                <form:input class="form-control" path="firstName"
+                            value="${editedNurse.firstName}"/>
                 <form:errors path="firstName" cssClass="error"/>
             </div>
             <div class="form-group col-md-6">
-                <form:label class="text-center" path="lastName"><spring:message code="label.lastName"/>:</form:label>
+                <form:label class="text-center" path="lastName">
+                    <spring:message code="label.lastName"/>:
+                </form:label>
                 <form:input class="form-control" path="lastName"
                             value="${editedNurse.lastName}"/>
                 <form:errors path="lastName" cssClass="error"/>
@@ -33,20 +35,26 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <form:label class="text-center"
-                            path="dateOfBirth"><spring:message code="label.dateOfBirth"/>:</form:label>
+                            path="dateOfBirth">
+                    <spring:message code="label.dateOfBirth"/>:
+                </form:label>
                 <form:input class="form-control" path="dateOfBirth" type="date"
                             value="${editedNurse.dateOfBirth}"/>
                 <form:errors path="dateOfBirth" cssClass="error"/>
             </div>
             <div class="form-group col-md-4">
-                <form:label class="text-center" path="email"><spring:message code="label.email"/>:</form:label>
+                <form:label class="text-center" path="email">
+                    <spring:message code="label.email"/>:
+                </form:label>
                 <form:input class="form-control" path="email"
                             value="${editedNurse.email}"/>
                 <form:errors path="email" cssClass="error"/>
             </div>
             <div class="form-group col-md-4">
                 <form:label class="text-center"
-                            path="phoneNumber"><spring:message code="label.phoneNumber"/>:</form:label>
+                            path="phoneNumber">
+                    <spring:message code="label.phoneNumber"/>:
+                </form:label>
                 <form:input class="form-control" path="phoneNumber"
                             value="${editedNurse.phoneNumber}"/>
                 <form:errors path="phoneNumber" cssClass="error"/>
@@ -55,28 +63,33 @@
 
         <div class="form-row">
             <div class="form-group col-md-4">
-                <form:label class="text-center"
-                                path="address"><spring:message code="label.address"/>:</form:label>
+                <form:label class="text-center" path="address">
+                    <spring:message code="label.address"/>:
+                </form:label>
                 <form:input class="form-control" path="address"
-                                value="${editedNurse.address}"/>
+                            value="${editedNurse.address}"/>
                 <form:errors path="address" cssClass="error"/>
             </div>
             <div class="form-group col-md-4">
-                <form:label class="text-center"
-                            path="username"><spring:message code="label.username"/>:</form:label>
+                <form:label class="text-center" path="username">
+                    <spring:message code="label.username"/>:
+                </form:label>
                 <form:input class="form-control" path="username"
                             value="${editedNurse.username}"/>
                 <form:errors path="username" cssClass="error"/>
             </div>
             <div class="form-group col-md-4">
-                <form:label class="text-center"
-                            path="password"><spring:message code="label.password"/>:</form:label>
+                <form:label class="text-center" path="password">
+                    <spring:message code="label.password"/>:
+                </form:label>
                 <form:input class="form-control" path="password"
                             value="${editedNurse.password}"/>
                 <form:errors path="password" cssClass="error"/>
             </div>
         </div>
-        <button type="submit" class="btn btn-secondary" value="Save Changes"><spring:message code="label.save"/></button>
+        <button type="submit" class="btn btn-secondary" value="Save Changes">
+            <spring:message code="label.save"/>
+        </button>
     </form:form>
 </div>
 

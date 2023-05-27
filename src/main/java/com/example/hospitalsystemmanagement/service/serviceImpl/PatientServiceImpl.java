@@ -18,7 +18,6 @@ import java.util.Optional;
  */
 @Service
 public class PatientServiceImpl implements PatientService {
-
     private PatientRepository patientRepository;
 
     @Autowired
@@ -62,6 +61,4 @@ public class PatientServiceImpl implements PatientService {
     public List<PatientWithNumberOpenedHospitalCards> findAllWithNumberOpenedHospitalCards(){
         return patientRepository.findAllWithNumberOpenedHospitalCards();
     }
-
-
 }

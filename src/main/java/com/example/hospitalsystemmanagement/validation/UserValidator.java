@@ -38,9 +38,6 @@ public class UserValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateOfBirth", "dateOfBirth.empty", messageSource.getMessage("validation.empty.dateOfBirth", null, LocaleContextHolder.getLocale()));
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "address.empty", messageSource.getMessage("validation.empty.address", null, LocaleContextHolder.getLocale()));
 
-
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password.empty", messageSource.getMessage("validation.empty.password", null, LocaleContextHolder.getLocale()));
-
          String firstName = signupUser.getFirstName();
         if ((firstName.length()) > 15) {
             errors.rejectValue("firstName", "firstName.tooLong", messageSource.getMessage("validation.moreCharacters.firstName", null, LocaleContextHolder.getLocale()));

@@ -8,14 +8,14 @@
     color: red;
 }</style>
 <div class="container">
-        <%--@elvariable id="appointment" type=""--%>
-        <form:form action="${pageContext.request.contextPath}/appointments/addAppointment"
-                   method="post"
-                   modelAttribute="appointment">
+    <%--@elvariable id="appointment" type=""--%>
+    <form:form action="${pageContext.request.contextPath}/appointments/addAppointment"
+               method="post"
+               modelAttribute="appointment">
         <div class="form-row">
             <div class="form-group col-md-12">
                 <form:hidden path="patient"/>
-               <form:hidden path="doctor"/>
+                <form:hidden path="doctor"/>
                 <form:hidden path="hospitalCard"/>
                 <form:hidden path="status" value="appointed"/>
             </div>
@@ -24,32 +24,36 @@
         <div class="form-row">
             <div class="form-group col-md-12">
                 <form:label class="text-center"
-                            path="procedures"><spring:message code="label.procedures"/>:</form:label>
+                            path="procedures"><spring:message
+                        code="label.procedures"/>:</form:label>
                 <form:textarea path="procedures" class="form-control"/>
                 <form:errors path="procedures" cssClass="error"/>
             </div>
             <div class="form-group col-md-12">
                 <form:label class="text-center"
-                            path="medications"><spring:message code="label.medications"/>:</form:label>
+                            path="medications"><spring:message
+                        code="label.medications"/>:</form:label>
                 <form:textarea path="medications" class="form-control"/>
                 <form:errors path="medications" cssClass="error"/>
             </div>
             <div class="form-group col-md-12">
-                <form:label class="text-center" path="operations"><spring:message code="label.operations"/>:</form:label>
+                <form:label class="text-center" path="operations"><spring:message
+                        code="label.operations"/>:</form:label>
                 <form:textarea path="operations" class="form-control"/>
                 <form:errors path="operations" cssClass="error"/>
             </div>
         </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <form:label class="text-center"
-                                path="date"><spring:message code="label.appointmentDate"/>:</form:label>
-                    <form:input path="date" class="form-control" type="date"/>
-                    <form:errors path="date" cssClass="error"/>
-                </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <form:label class="text-center"
+                            path="date"><spring:message code="label.appointmentDate"/>:</form:label>
+                <form:input path="date" class="form-control" type="date"/>
+                <form:errors path="date" cssClass="error"/>
+            </div>
 
             <div class="form-group col-md-6">
-                <form:label class="text-center" path="nurse"><spring:message code="label.nurse"/>:</form:label>
+                <form:label class="text-center" path="nurse"><spring:message
+                        code="label.nurse"/>:</form:label>
                 <form:select class="form-control" path="nurse">
                     <form:option value="" label="Choose a nurse" disabled="false"/>
                     <form:options items="${nurses}" itemValue="id"
@@ -57,11 +61,12 @@
                 </form:select>
                 <form:errors path="nurse" cssClass="error"/>
             </div>
-            </div>
+        </div>
 
-            <button type="submit" class="btn btn-secondary" value="Save Changes"><spring:message code="label.save"/>
-            </button>
-            </form:form>
+        <button type="submit" class="btn btn-secondary" value="Save Changes">
+            <spring:message code="label.save"/>
+        </button>
+    </form:form>
 
-    </div>
+</div>
 <%@ include file="include/end-html.jsp" %>

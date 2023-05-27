@@ -14,10 +14,10 @@ import java.util.List;
  */
 public interface DoctorRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT * FROM users where users.role_Id=(Select roles.id from roles where roles.role_Name='doctor')", nativeQuery = true)
-    public List<User> findAll();
+    List<User> findAll();
 
     @Query(value = "SELECT * FROM users where users.role_Id=(Select roles.id from roles where roles.role_Name='nurse')", nativeQuery = true)
-    public List<User> findAllNurses();
+    List<User> findAllNurses();
 
     @Query(value = "SELECT u.id, u.first_Name, u.last_Name, u.date_Of_Birth, u.email,\n" +
             "            u.phone_Number, u.address, c.name_Category,\n" +

@@ -22,10 +22,8 @@ import java.util.List;
 @RequestMapping("/nurses")
 @PreAuthorize("hasRole('ADMIN')")
 public class NurseController {
-
     private NurseService nurseService;
     private RoleService roleService;
-
     @Autowired
     private UserValidator newUserValidator;
 

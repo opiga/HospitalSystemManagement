@@ -1,6 +1,5 @@
 package com.example.hospitalsystemmanagement.service;
 
-import com.example.hospitalsystemmanagement.entity.Category;
 import com.example.hospitalsystemmanagement.entity.Role;
 
 import java.util.List;

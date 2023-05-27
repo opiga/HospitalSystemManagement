@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-
 /**
  * Created by bonda on 17.05.2023 21:47
  *
@@ -37,15 +36,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AppointmentControllerTest {
     @Autowired
     protected WebApplicationContext context;
-
     @Mock
     private AppointmentService appointmentService;
-
     @InjectMocks
     private AppointmentController appointmentController;
-
     private MockMvc mockMvc;
-
 
     @Before
     public void setUp() {
@@ -57,7 +52,6 @@ public class AppointmentControllerTest {
                                  .setViewResolvers(viewResolver)
                                  .build();
     }
-
 
     @Test
     @WithMockUser(roles = "DOCTOR")
@@ -71,12 +65,6 @@ public class AppointmentControllerTest {
                .andExpect(model().attributeExists("appointments"))
                .andReturn();
     }
-
-
-
-
-
-
 }
 
 

@@ -13,12 +13,7 @@ import java.util.List;
  */
 public interface NurseRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT * FROM users where users.role_Id=(Select roles.id from roles where roles.role_Name='nurse')", nativeQuery = true)
-    public List<User> findAll();
-
-
-
-
-
+    List<User> findAll();
 
 
 }

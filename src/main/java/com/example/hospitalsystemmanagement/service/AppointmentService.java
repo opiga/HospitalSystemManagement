@@ -1,9 +1,6 @@
 package com.example.hospitalsystemmanagement.service;
 
 import com.example.hospitalsystemmanagement.entity.Appointment;
-import com.example.hospitalsystemmanagement.entity.User;
-import com.example.hospitalsystemmanagement.repository.DoctorWithUsers;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

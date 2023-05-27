@@ -41,7 +41,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 public class HospitalCardControllerTest {
-
     @Autowired
     protected WebApplicationContext context;
     @Mock
@@ -52,12 +51,9 @@ public class HospitalCardControllerTest {
     private DoctorService doctorService;
     @Mock
     private PatientService patientService;
-
     @InjectMocks
     private HospitalCardController hospitalCardController;
-
     private MockMvc mockMvc;
-
     @MockBean
     private HospitalCardValidator newHospitalCardValidator;
     private HospitalCard hospitalCard;
@@ -101,7 +97,6 @@ public class HospitalCardControllerTest {
         hospitalCard.setNurse(nurse1);
     }
 
-
     @Test
     public void testListHospitalCards() throws Exception {
         List<HospitalCard> hospitalCards = new ArrayList<>();
@@ -128,7 +123,6 @@ public class HospitalCardControllerTest {
         verify(doctorService).findAll();
         verify(doctorService).findAllNurses();
     }
-
 
     @Test
     public void testAddHospitalCard() throws Exception {
@@ -160,14 +154,15 @@ public class HospitalCardControllerTest {
     @Test
     public void testEditHospitalCard() throws Exception {
         BindingResult bindingResult = new BeanPropertyBindingResult(hospitalCard, "hospitalCard");
-
         when(doctorService.findAll()).thenReturn(new ArrayList<>());
         when(doctorService.findAllNurses()).thenReturn(new ArrayList<>());
-
-        mockMvc.perform(post("/hospitalcards/editsave").flashAttr("editedHospitalCard", hospitalCard).flashAttr("org.springframework.validation.BindingResult.editedHospitalCard", bindingResult)).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/hospitalcards/list/" + hospitalCard.getPatient().getId())).andReturn();
+        mockMvc.perform(post("/hospitalcards/editsave")
+                                .flashAttr("editedHospitalCard", hospitalCard)
+                                .flashAttr("org.springframework.validation.BindingResult.editedHospitalCard", bindingResult))
+               .andExpect(status().is3xxRedirection())
+               .andExpect(redirectedUrl("/hospitalcards/list/" + hospitalCard.getPatient().getId()))
+               .andReturn();
     }
-
-
 }
 
 

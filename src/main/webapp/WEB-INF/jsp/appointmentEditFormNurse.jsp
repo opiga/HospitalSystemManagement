@@ -49,13 +49,18 @@
                 <form:label class="text-center" path="status"><spring:message code="label.status"/>:</form:label>
                 <form:select class="form-control" path="status">
                     <form:option value="" label="Choose a status" disabled="false"/>
-                    <form:option value="appointed"><spring:message code="label.appointed"/></form:option>
-                    <form:option value="completed"><spring:message code="label.completed"/></form:option>
-                    <form:option value="canceled"><spring:message code="label.canceled"/></form:option>
+                    <form:option value="appointed"><spring:message
+                            code="label.appointed"/></form:option>
+                    <form:option value="completed"><spring:message
+                            code="label.completed"/></form:option>
+                    <form:option value="canceled"><spring:message
+                            code="label.canceled"/></form:option>
                 </form:select>
             </div>
         </div>
-        <button type="submit" class="btn btn-secondary" value="Save Changes"><spring:message code="label.save"/></button>
+        <button type="submit" class="btn btn-secondary" value="Save Changes">
+            <spring:message code="label.save"/>
+        </button>
     </form:form>
 </div>
 

@@ -1,6 +1,5 @@
 package com.example.hospitalsystemmanagement.service.serviceImpl;
 
-import com.example.hospitalsystemmanagement.entity.Role;
 import com.example.hospitalsystemmanagement.entity.User;
 import com.example.hospitalsystemmanagement.repository.DoctorRepository;
 import com.example.hospitalsystemmanagement.repository.DoctorWithUsers;
@@ -19,7 +18,6 @@ import java.util.Optional;
  */
 @Service
 public class DoctorServiceImpl implements DoctorService {
-
     private final DoctorRepository doctorRepository;
 
     @Autowired
@@ -35,7 +33,6 @@ public class DoctorServiceImpl implements DoctorService {
         return doctorRepository.findAll();
     }
 
-
     @Override
     public List<User> findAllNurses() {
         return doctorRepository.findAllNurses();
@@ -45,8 +42,6 @@ public class DoctorServiceImpl implements DoctorService {
     public List<DoctorWithUsers> findAllWithPatients() {
         return doctorRepository.findAllWithPatients();
     }
-
-    ;
 
     @Override
     public User findById(Long theId) {
@@ -63,11 +58,9 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void save(User theDoctor) {
-        System.out.println(theDoctor);
         theDoctor.setPassword(bCryptPasswordEncoder.encode(theDoctor.getPassword()));
         doctorRepository.save(theDoctor);
     }
-
 
     @Override
     public void deleteById(Long theId) {

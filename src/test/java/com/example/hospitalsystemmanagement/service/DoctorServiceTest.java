@@ -25,10 +25,8 @@ import static org.mockito.Mockito.*;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class DoctorServiceTest {
-
     @InjectMocks
     private DoctorServiceImpl doctorService;
-
     @Mock
     private DoctorRepository doctorRepository;
 
@@ -50,7 +48,6 @@ public class DoctorServiceTest {
         assertEquals("Smith", result.get(0).getLastName());
         assertEquals("John", result.get(1).getFirstName());
         assertEquals("Pit", result.get(1).getLastName());
-
     }
 
     @Test

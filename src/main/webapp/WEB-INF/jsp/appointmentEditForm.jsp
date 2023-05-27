@@ -50,7 +50,8 @@
             </div>
 
             <div class="form-group col-md-4">
-                <form:label class="text-center" path="nurse"><spring:message code="label.nurse"/>:</form:label>
+                <form:label class="text-center" path="nurse"><spring:message
+                        code="label.nurse"/>:</form:label>
                 <form:select class="form-control" path="nurse.id">
                     <form:option value="" label="Choose a nurse" disabled="false"/>
                     <form:options items="${nurses}" itemValue="id"
@@ -63,13 +64,17 @@
                 <form:label class="text-center" path="status"><spring:message code="label.status"/>:</form:label>
                 <form:select class="form-control" path="status">
                     <form:option value="" label="Choose a status" disabled="false"/>
-                    <form:option value="appointed"><spring:message code="label.appointed"/></form:option>
-                    <form:option value="completed"><spring:message code="label.completed"/></form:option>
-                    <form:option value="canceled"><spring:message code="label.canceled"/></form:option>
+                    <form:option value="appointed"><spring:message
+                            code="label.appointed"/></form:option>
+                    <form:option value="completed"><spring:message
+                            code="label.completed"/></form:option>
+                    <form:option value="canceled"><spring:message
+                            code="label.canceled"/></form:option>
                 </form:select>
             </div>
         </div>
-        <button type="submit" class="btn btn-secondary" value="Save Changes"><spring:message code="label.save"/></button>
+        <button type="submit" class="btn btn-secondary" value="Save Changes"><spring:message
+                code="label.save"/></button>
     </form:form>
 </div>
 
