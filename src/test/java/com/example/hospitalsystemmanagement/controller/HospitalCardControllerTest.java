@@ -118,7 +118,7 @@ public class HospitalCardControllerTest {
         nurses.add(nurse1);
         nurses.add(nurse2);
         when(doctorService.findAllNurses()).thenReturn(nurses);
-        mockMvc.perform(get("/hospitalcards/addhospitalcard/{id}", patient.getId())).andExpect(status().isOk()).andExpect(view().name("hospitalCardAddForm")).andExpect(model().attributeExists("newHospitalCard", "doctors", "nurses")).andReturn();
+        mockMvc.perform(get("/hospitalcards/add/{id}", patient.getId())).andExpect(status().isOk()).andExpect(view().name("hospitalCardAddForm")).andExpect(model().attributeExists("newHospitalCard", "doctors", "nurses")).andReturn();
         verify(patientService).findById(patient.getId());
         verify(doctorService).findAll();
         verify(doctorService).findAllNurses();
@@ -127,7 +127,7 @@ public class HospitalCardControllerTest {
     @Test
     public void testAddHospitalCard() throws Exception {
         BindingResult bindingResult = new BeanPropertyBindingResult(hospitalCard, "newHospitalCard");
-        mockMvc.perform(post("/addNewHospitalCard")
+        mockMvc.perform(post("/add")
                                 .flashAttr("newHospitalCard", hospitalCard)
                                 .flashAttr("result", bindingResult))
                .andExpect(status().is4xxClientError())
@@ -156,7 +156,7 @@ public class HospitalCardControllerTest {
         BindingResult bindingResult = new BeanPropertyBindingResult(hospitalCard, "hospitalCard");
         when(doctorService.findAll()).thenReturn(new ArrayList<>());
         when(doctorService.findAllNurses()).thenReturn(new ArrayList<>());
-        mockMvc.perform(post("/hospitalcards/editsave")
+        mockMvc.perform(post("/hospitalcards/edit")
                                 .flashAttr("editedHospitalCard", hospitalCard)
                                 .flashAttr("org.springframework.validation.BindingResult.editedHospitalCard", bindingResult))
                .andExpect(status().is3xxRedirection())

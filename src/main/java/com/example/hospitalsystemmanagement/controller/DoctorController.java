@@ -45,7 +45,7 @@ public class DoctorController {
         return "viewDoctor";
     }
 
-    @GetMapping("/adddoctor")
+    @GetMapping("/add")
     public String showAddDoctorForm(Model model) {
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
@@ -53,7 +53,7 @@ public class DoctorController {
         return "doctorForm";
     }
 
-    @PostMapping("/adddoctoru")
+    @PostMapping("/add")
     public String addDoctor(@ModelAttribute("doctor") User doctor, BindingResult result, Model model) {
         newFormValidator.validate(doctor, result);
         if (result.hasErrors()) {
@@ -66,7 +66,7 @@ public class DoctorController {
         return "redirect:/doctors/list";
     }
 
-    @GetMapping("/editdoctor/{id}")
+    @GetMapping("/edit/{id}")
     public String showEditDoctorForm(@PathVariable("id") Long id, Model model) {
         User doctor = doctorService.findById(id);
         List<Category> categories = categoryService.findAll();
@@ -75,7 +75,7 @@ public class DoctorController {
         return "doctorEditForm";
     }
 
-    @PostMapping("/editsave/{id}")
+    @PostMapping("/edit/{id}")
     public String editDoctor(@PathVariable("id") Long id, @ModelAttribute("editedDoctor") User doctor,BindingResult result,Model model) {
         newFormValidator.validate(doctor, result);
         if (result.hasErrors()) {

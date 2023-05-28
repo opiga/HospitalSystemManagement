@@ -60,7 +60,7 @@ public class AppointmentController {
     }
 
     @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE')")
-    @GetMapping("/listAppointments/{hospitalCardId}")
+    @GetMapping("/list/{hospitalCardId}")
     public String getListAppointmentsForCurrentUser(@PathVariable("hospitalCardId") Long hospitalCardId, Model theModel) {
         List<Appointment> theAppointments = appointmentService.findAllAppointedByHospitalCardId(hospitalCardId);
         theModel.addAttribute("appointments", theAppointments);
@@ -68,7 +68,7 @@ public class AppointmentController {
     }
 
     @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE')")
-    @GetMapping("/addAppointment/{hospitalCardId}/{patientId}/{doctorId}/{nurseId}")
+    @GetMapping("/add/{hospitalCardId}/{patientId}/{doctorId}/{nurseId}")
     public String showAddAppointmentForm(@AuthenticationPrincipal User currentUser, @PathVariable("hospitalCardId") Long hospitalCardId, @PathVariable("patientId") Long patientId, @PathVariable("doctorId") Long doctorId, @PathVariable("nurseId") Long nurseId, Model model) {
         Appointment newAppointment = new Appointment();
         newAppointment.setPatient(patientService.findById(patientId));
@@ -88,7 +88,7 @@ public class AppointmentController {
         }
     }
 
-    @PostMapping("/addAppointment")
+    @PostMapping("/add")
     public String addAppointment(@AuthenticationPrincipal User currentUser, @ModelAttribute("appointment") Appointment appointment, BindingResult result, Model model) {
         appointmentValidator.validate(appointment, result);
         if (result.hasErrors()) {
@@ -106,7 +106,7 @@ public class AppointmentController {
     }
 
 
-    @GetMapping("/editAppointment/{id}")
+    @GetMapping("/edit/{id}")
     public String showEditAppointmentForm(@AuthenticationPrincipal User currentUser, @PathVariable("id") Long id, Model model) {
         Appointment appointment = appointmentService.findById(id);
         model.addAttribute("editedAppointment", appointment);
@@ -120,7 +120,7 @@ public class AppointmentController {
         }
     }
 
-    @PostMapping("/editsave")
+    @PostMapping("/edit/{id}")
     public String editAppointment(@AuthenticationPrincipal User currentUser, @ModelAttribute("editedAppointment") Appointment appointment, BindingResult result, Model model) {
         if (currentUser.getRole().getRoleName().equals("doctor")) {
             appointmentValidator.validate(appointment, result);

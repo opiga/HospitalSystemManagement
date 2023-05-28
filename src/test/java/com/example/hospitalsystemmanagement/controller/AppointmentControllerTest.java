@@ -59,7 +59,7 @@ public class AppointmentControllerTest {
         List<Appointment> appointments = new ArrayList<>();
         when(appointmentService.findAllAppointedByHospitalCardId(1L)).thenReturn(appointments);
         mockMvc = MockMvcBuilders.standaloneSetup(appointmentController).build();
-        mockMvc.perform(MockMvcRequestBuilders.get("/appointments/listAppointments/{hospitalCardId}", 1L))
+        mockMvc.perform(MockMvcRequestBuilders.get("/appointments/list/{hospitalCardId}", 1L))
                .andExpect(MockMvcResultMatchers.status().isOk())
                .andExpect(view().name("viewAppointments"))
                .andExpect(model().attributeExists("appointments"))

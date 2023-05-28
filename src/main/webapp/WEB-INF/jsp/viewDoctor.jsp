@@ -30,7 +30,7 @@
             <td>${doctor.number_Of_Patients}</td>
             <td>
                 <a class="btn btn-light"
-                   href="${pageContext.request.contextPath}/doctors/editdoctor/${doctor.id}">
+                   href="${pageContext.request.contextPath}/doctors/edit/${doctor.id}">
                     <spring:message code="label.edit"/>
                 </a>
                 <a class="btn btn-light"
@@ -43,7 +43,7 @@
     </table>
     <br>
     <a class="btn btn-secondary"
-       href="${pageContext.request.contextPath}/doctors/adddoctor">
+       href="${pageContext.request.contextPath}/doctors/add">
         <spring:message code="label.addDoctor"/>
     </a>
 </div>

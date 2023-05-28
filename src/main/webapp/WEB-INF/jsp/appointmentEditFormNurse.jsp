@@ -10,7 +10,7 @@
 <div class="container">
     <%--<jsp:useBean id="editedDoctor" scope="request" type="com.sun.org.apache.xml.internal.security.signature.SignatureProperty"/>--%>
     <%--@elvariable id="editedAppointment" type=""--%>
-    <form:form action="${pageContext.request.contextPath}/appointments/editsave"
+    <form:form action="${pageContext.request.contextPath}/appointments/edit/${editedAppointment.id}"
                method="post"
                modelAttribute="editedAppointment">
         <div class="form-row">
@@ -58,6 +58,10 @@
                 </form:select>
             </div>
         </div>
+        <a class="btn btn-secondary"
+           href="${pageContext.request.contextPath}/appointments/list">
+            <spring:message code="label.cancel"/>
+        </a>
         <button type="submit" class="btn btn-secondary" value="Save Changes">
             <spring:message code="label.save"/>
         </button>

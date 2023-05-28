@@ -37,11 +37,14 @@
                 <td>${appointment.doctor.firstName} ${appointment.doctor.lastName}, ${appointment.doctor.category.nameCategory}
                 <td class="text-center">
                     <a class="btn btn-light"
-                       href="${pageContext.request.contextPath}/appointments/editAppointment/${appointment.id}">Edit</a>
+                       href="${pageContext.request.contextPath}/appointments/edit/${appointment.id}">
+                        <spring:message code="label.edit.appointment"/>
+                    </a>
 
                     <a class="btn btn-light"
-                       href="${pageContext.request.contextPath}/appointments/addAppointment/${appointment.hospitalCard.hospitalCardId}/${appointment.patient.id}/${appointment.doctor.id}/${appointment.nurse.id}"><spring:message
-                            code="label.makeAppointment"/></a>
+                       href="${pageContext.request.contextPath}/appointments/add/${appointment.hospitalCard.hospitalCardId}/${appointment.patient.id}/${appointment.doctor.id}/${appointment.nurse.id}">
+                        <spring:message code="label.makeAppointment"/>
+                    </a>
                 </td>
             </tr>
         </c:forEach>

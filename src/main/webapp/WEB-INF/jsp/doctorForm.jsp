@@ -9,7 +9,7 @@
 }</style>
 <div class="container">
     <%--@elvariable id="doctor" type=""--%>
-    <form:form action="${pageContext.request.contextPath}/doctors/adddoctoru" method="post"
+    <form:form action="${pageContext.request.contextPath}/doctors/add" method="post"
                modelAttribute="doctor">
         <div class="form-row">
             <div class="form-group col-md-12">

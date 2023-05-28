@@ -33,21 +33,4 @@ public class HospitalCardValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "doctor", "doctor.empty", messageSource.getMessage("validation.empty.doctor", null, LocaleContextHolder.getLocale()));
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nurse", "nurse.empty", messageSource.getMessage("validation.empty.nurse", null, LocaleContextHolder.getLocale()));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        }
+}

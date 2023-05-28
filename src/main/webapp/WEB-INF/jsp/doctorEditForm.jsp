@@ -9,7 +9,7 @@
 }</style>
 <div class="container">
     <%--@elvariable id="editedDoctor" type=""--%>
-    <form:form action="${pageContext.request.contextPath}/doctors/editsave/${editedDoctor.id}"
+    <form:form action="${pageContext.request.contextPath}/doctors/edit/${editedDoctor.id}"
                method="post"
                modelAttribute="editedDoctor">
         <div class="form-row">
@@ -103,6 +103,10 @@
                 <form:errors path="category" cssClass="error"/>
             </div>
         </div>
+        <a class="btn btn-secondary"
+           href="${pageContext.request.contextPath}/doctors/list">
+            <spring:message code="label.cancel"/>
+        </a>
         <button type="submit" class="btn btn-secondary" value="Save Changes"><spring:message
                 code="label.save"/></button>
     </form:form>

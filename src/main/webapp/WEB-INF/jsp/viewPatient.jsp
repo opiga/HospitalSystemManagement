@@ -31,12 +31,12 @@
             <td>${patient.address}
             <td class="text-center">
                 <a class="btn btn-light"
-                   href="${pageContext.request.contextPath}/patients/editpatient/${patient.id}"><spring:message
+                   href="${pageContext.request.contextPath}/patients/edit/${patient.id}"><spring:message
                         code="label.edit"/>
                 </a>
                 <c:if test="${patient.number_Of_Hospital_Cards == 0}">
                 <a class="btn btn-light"
-                   href="${pageContext.request.contextPath}/hospitalcards/addhospitalcard/${patient.id}">
+                   href="${pageContext.request.contextPath}/hospitalcards/add/${patient.id}">
                     <spring:message code="label.addHospitalCard"/></a>
                 </c:if>
                 <c:if test="${patient.number_Of_Hospital_Cards > 0}">
@@ -48,7 +48,7 @@
         </c:forEach>
     </table>
     <br>
-    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/patients/addpatient">
+    <a class="btn btn-secondary" href="${pageContext.request.contextPath}/patients/add">
         <spring:message code="label.addPatient"/></a>
 </div>
 <br>

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="include/begin-html.jsp" %>
 <div class="p-3 text-center">
-    <h1 class="mb-2">Edit Appointment</h1>
+    <h1 class="mb-2"><spring:message code="label.edit.appointment"/></h1>
 </div>
 <style>.error {
     color: red;
@@ -10,7 +10,7 @@
 <div class="container">
     <%--<jsp:useBean id="editedDoctor" scope="request" type="com.sun.org.apache.xml.internal.security.signature.SignatureProperty"/>--%>
     <%--@elvariable id="editedAppointment" type=""--%>
-    <form:form action="${pageContext.request.contextPath}/appointments/editsave"
+    <form:form action="${pageContext.request.contextPath}/appointments/edit/${editedAppointment.id}"
                method="post"
                modelAttribute="editedAppointment">
         <div class="form-row">
@@ -73,8 +73,13 @@
                 </form:select>
             </div>
         </div>
-        <button type="submit" class="btn btn-secondary" value="Save Changes"><spring:message
-                code="label.save"/></button>
+        <a class="btn btn-secondary"
+           href="${pageContext.request.contextPath}/appointments/list">
+            <spring:message code="label.cancel"/>
+        </a>
+        <button type="submit" class="btn btn-secondary" value="Save Changes">
+            <spring:message code="label.save"/>
+        </button>
     </form:form>
 </div>
 

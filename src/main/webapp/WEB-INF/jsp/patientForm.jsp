@@ -10,7 +10,7 @@
 <div class="container">
 
     <%--@elvariable id="patient" type=""--%>
-    <form:form action="${pageContext.request.contextPath}/patients/addpatientu" method="post"
+    <form:form action="${pageContext.request.contextPath}/patients/add" method="post"
                modelAttribute="patient">
         <div class="form-row">
             <div class="form-group col-md-12">

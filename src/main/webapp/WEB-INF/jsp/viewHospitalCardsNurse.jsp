@@ -34,10 +34,10 @@
             <td>${hospitalCard.discharged}
             <td class="text-center">
                 <a class="btn btn-light"
-                   href="${pageContext.request.contextPath}/appointments/addAppointment/${hospitalCard.hospitalCardId}/${hospitalCard.patient.id}/${hospitalCard.doctor.id}/${hospitalCard.nurse.id}"><spring:message
+                   href="${pageContext.request.contextPath}/appointments/add/${hospitalCard.hospitalCardId}/${hospitalCard.patient.id}/${hospitalCard.doctor.id}/${hospitalCard.nurse.id}"><spring:message
                         code="label.makeAppointment"/></a>
                 <a class="btn btn-light"
-                   href="${pageContext.request.contextPath}/appointments/listAppointments/${hospitalCard.hospitalCardId}"><spring:message
+                   href="${pageContext.request.contextPath}/appointments/list/${hospitalCard.hospitalCardId}"><spring:message
                         code="label.viewAppointment"/></a>
                 </c:forEach>
     </table>

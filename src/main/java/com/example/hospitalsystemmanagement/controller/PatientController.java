@@ -34,7 +34,7 @@ public class PatientController {
     private PatientService patientService;
     private RoleService roleService;
     @Autowired
-    private UserValidator newFormValidator;
+    private UserValidator userValidator;
 
     public PatientController(PatientService thePatientService, RoleService theRoleService) {
         patientService = thePatientService;
@@ -48,15 +48,15 @@ public class PatientController {
         return "viewPatient";
     }
 
-    @GetMapping("/addpatient")
+    @GetMapping("/add")
     public String showAddPatientForm(Model model) {
         model.addAttribute("patient", new User());
         return "patientForm";
     }
 
-    @PostMapping("/addpatientu")
+    @PostMapping("/add")
     public String addPatient(@ModelAttribute("patient") User patient, BindingResult result) {
-        newFormValidator.validate(patient, result);
+        userValidator.validate(patient, result);
         if (result.hasErrors()) {
             return "patientForm";
         }
@@ -65,15 +65,19 @@ public class PatientController {
         return "redirect:/patients/list";
     }
 
-    @GetMapping(value = "/editpatient/{id}")
+    @GetMapping(value = "/edit/{id}")
     public String edit(@PathVariable("id") Long patientId, Model m) {
         User patient = patientService.findById(patientId);
         m.addAttribute("patient", patient);
         return "patientEditForm";
     }
 
-    @PostMapping(value = "/editsave")
-    public String editsave(@ModelAttribute("patient") User patient) {
+    @PostMapping(value = "/edit/{id}")
+    public String edit(@ModelAttribute("patient") User patient, BindingResult result) {
+        userValidator.validate(patient, result);
+        if (result.hasErrors()) {
+            return "/patientEditForm";
+        }
         patientService.save(patient);
         return "redirect:/patients/list";
     }

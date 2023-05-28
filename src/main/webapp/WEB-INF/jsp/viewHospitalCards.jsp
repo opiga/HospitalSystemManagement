@@ -51,7 +51,7 @@
 
     <br>
     <a class="btn btn-secondary"
-       href="${pageContext.request.contextPath}/hospitalcards/addhospitalcard/${hospitalCardPatient.id}">
+       href="${pageContext.request.contextPath}/hospitalcards/add/${hospitalCardPatient.id}">
         <spring:message code="label.addHospitalCard"/>
     </a>
 </div>

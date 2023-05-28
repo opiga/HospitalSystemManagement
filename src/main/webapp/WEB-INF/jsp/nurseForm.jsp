@@ -8,9 +8,8 @@
     color: red;
 }</style>
 <div class="container">
-
     <%--@elvariable id="nurse" type=""--%>
-    <form:form action="${pageContext.request.contextPath}/nurses/addNurseU" method="post"
+    <form:form action="${pageContext.request.contextPath}/nurses/add" method="post"
                modelAttribute="nurse">
         <div class="form-row">
             <div class="form-group col-md-6">

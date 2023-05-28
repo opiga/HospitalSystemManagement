@@ -53,13 +53,13 @@ public class SignupValidator implements Validator {
         if ((lastName.length()) > 15) {
             errors.rejectValue("lastName", "lastName.tooLong", messageSource.getMessage("validation.moreCharacters.lastName", null, LocaleContextHolder.getLocale()));
         }
-        Pattern patternPhone = Pattern.compile("^\\+(?:[0-9] ?){6,14}[0-9]$");
+        Pattern patternPhone = Pattern.compile(ValidatorConstants.PHONE_REGEX);
         Matcher matcherPhone = patternPhone.matcher(signupUser.getPhoneNumber());
         if (!matcherPhone.matches()) {
             errors.rejectValue("phoneNumber", "phoneNumber.invalid", messageSource.getMessage("validation.invalidFormat.phoneNumber", null, LocaleContextHolder.getLocale()));
         }
 
-        Pattern patternEmail = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        Pattern patternEmail = Pattern.compile(ValidatorConstants.EMAIL_REGEX);
         Matcher matcherEmail = patternEmail.matcher(signupUser.getEmail());
         if (!matcherEmail.matches()) {
             errors.rejectValue("email", "email.invalid", messageSource.getMessage("validation.invalidFormat.email", null, LocaleContextHolder.getLocale()));
@@ -73,7 +73,7 @@ public class SignupValidator implements Validator {
         if (userService.loadUserByUsername(username) != null) {
             errors.rejectValue("username", "username", messageSource.getMessage("validation.exists.userName", null, LocaleContextHolder.getLocale()));
         }
-        Pattern patternPassword = Pattern.compile("(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}");
+        Pattern patternPassword = Pattern.compile(ValidatorConstants.PASSWORD_REGEX);
         Matcher matcherPassword = patternPassword.matcher(signupUser.getPassword());
         if (!matcherPassword.matches()) {
             errors.rejectValue("password", "password.invalid", messageSource.getMessage("validation.invalidFormat.password", null, LocaleContextHolder.getLocale()));

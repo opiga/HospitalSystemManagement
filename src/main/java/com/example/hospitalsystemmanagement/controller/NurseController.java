@@ -39,13 +39,13 @@ public class NurseController {
         return "viewNurse";
     }
 
-    @GetMapping("/addNurse")
+    @GetMapping("/add")
     public String showAddNurseForm(Model model) {
         model.addAttribute("nurse", new User());
         return "nurseForm";
     }
 
-    @PostMapping("/addNurseU")
+    @PostMapping("/add")
     public String addNurse(@ModelAttribute("nurse") User nurse, BindingResult result, Model model) {
         newUserValidator.validate(nurse, result);
         if (result.hasErrors()) {
@@ -56,14 +56,14 @@ public class NurseController {
         return "redirect:/nurses/list";
     }
 
-    @GetMapping("/editNurse/{id}")
+    @GetMapping("/edit/{id}")
     public String showEditDoctorForm(@PathVariable("id") Long id, Model model) {
         User nurse = nurseService.findById(id);
         model.addAttribute("editedNurse", nurse);
         return "nurseEditForm";
     }
 
-    @PostMapping("/editSave")
+    @PostMapping("/edit/{id}")
     public String editDoctor(@ModelAttribute("editedNurse") User nurse, BindingResult result) {
         newUserValidator.validate(nurse, result);
         if (result.hasErrors()) {

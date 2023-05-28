@@ -26,7 +26,7 @@
             <td>${nurse.email}</td>
             <td>${nurse.phoneNumber}</td>
             <td><a class="btn btn-light"
-                   href="${pageContext.request.contextPath}/nurses/editNurse/${nurse.id}"><spring:message
+                   href="${pageContext.request.contextPath}/nurses/edit/${nurse.id}"><spring:message
                     code="label.edit"/></a>
                 <a class="btn btn-light"
                    href="${pageContext.request.contextPath}/nurses/delete/${nurse.id}"><spring:message
@@ -35,7 +35,7 @@
     </table>
     <br>
     <a class="btn btn-secondary"
-       href="${pageContext.request.contextPath}/nurses/addNurse"><spring:message
+       href="${pageContext.request.contextPath}/nurses/add"><spring:message
             code="label.addNurse"/></a>
 </div>
 <br>

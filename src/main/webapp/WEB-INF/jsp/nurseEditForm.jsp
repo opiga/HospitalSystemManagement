@@ -10,7 +10,8 @@
 
 <div class="container">
     <%--@elvariable id="editedNurse" type=""--%>
-    <form:form action="${pageContext.request.contextPath}/nurses/editSave" method="post"
+    <form:form action="${pageContext.request.contextPath}/nurses/edit/${editedNurse.id}"
+               method="post"
                modelAttribute="editedNurse">
         <form:hidden path="id"/>
         <form:hidden path="role"/>
@@ -87,6 +88,10 @@
                 <form:errors path="password" cssClass="error"/>
             </div>
         </div>
+        <a class="btn btn-secondary"
+           href="${pageContext.request.contextPath}/nurses/list">
+            <spring:message code="label.cancel"/>
+        </a>
         <button type="submit" class="btn btn-secondary" value="Save Changes">
             <spring:message code="label.save"/>
         </button>

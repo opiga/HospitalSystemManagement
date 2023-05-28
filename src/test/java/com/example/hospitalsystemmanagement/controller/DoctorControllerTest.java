@@ -90,7 +90,7 @@ public class DoctorControllerTest {
                 category, category2);
         when(categoryService.findAll()).thenReturn(categories);
         mockMvc = MockMvcBuilders.standaloneSetup(doctorController).build();
-        mockMvc.perform(get("/doctors/adddoctor"))
+        mockMvc.perform(get("/doctors/add"))
                .andExpect(status().isOk())
                .andExpect(view().name("doctorForm"))
                .andExpect(model().attributeExists("categories"))
@@ -105,7 +105,7 @@ public class DoctorControllerTest {
         doNothing().when(newFormValidator).validate(any(), any());
         doNothing().when(doctorService).save(any());
 
-        mockMvc.perform(post("/doctors/adddoctoru")
+        mockMvc.perform(post("/doctors/add")
                                 .param("firstName", "Test")
                                 .param("lastName", "Testov")
                                 .param("email", "Test.Testov@example.com")
@@ -122,7 +122,7 @@ public class DoctorControllerTest {
         when(doctorService.findById(doctor.getId())).thenReturn(doctor);
         when(categoryService.findAll()).thenReturn(categories);
 
-        mockMvc.perform(get("/doctors/editdoctor/{id}", doctor.getId()))
+        mockMvc.perform(get("/doctors/edit/{id}", doctor.getId()))
                .andExpect(status().isOk())
                .andExpect(view().name("doctorEditForm"))
                .andExpect(model().attributeExists("editedDoctor"))
@@ -138,7 +138,7 @@ public class DoctorControllerTest {
         when(categoryService.findById(doctor.getCategory().getCategoryId())).thenReturn(doctor.getCategory());
         when(result.hasErrors()).thenReturn(false);
 
-        mockMvc.perform(post("/doctors/editsave/{id}", doctor.getId())
+        mockMvc.perform(post("/doctors/edit/{id}", doctor.getId())
                                 .flashAttr("editedDoctor", doctor)
                                 .requestAttr("result", result))
                .andExpect(status().is3xxRedirection())

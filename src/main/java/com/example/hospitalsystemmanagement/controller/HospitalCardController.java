@@ -61,7 +61,7 @@ public class HospitalCardController {
     }
 
 
-    @GetMapping("/addhospitalcard/{id}")
+    @GetMapping("/add/{id}")
     public String showAddHospitalCardForm(@PathVariable("id") Long patientId, Model model) {
         HospitalCard newHospitalCard = new HospitalCard();
         newHospitalCard.setPatient(patientService.findById(patientId));
@@ -73,12 +73,10 @@ public class HospitalCardController {
         return "hospitalCardAddForm";
     }
 
-    @PostMapping("/addNewHospitalCard")
+    @PostMapping("/add")
     public String addHospitalCard(@ModelAttribute("newHospitalCard") HospitalCard hospitalCard, BindingResult result, Model model) {
-
         newHospitalCardValidator.validate(hospitalCard, result);
         if (result.hasErrors()) {
-
             model.addAttribute("newHospitalCard", hospitalCard);
             List<User> doctors = doctorService.findAll();
             model.addAttribute("doctors", doctors);
@@ -86,11 +84,9 @@ public class HospitalCardController {
             model.addAttribute("nurses", nurses);
             return "hospitalCardAddForm";
         }
-
         User findDoctor = doctorService.findById(hospitalCard.getDoctor().getId());
         hospitalCard.setDoctor(findDoctor);
         hospitalCardService.save(hospitalCard);
-
         return "redirect:/hospitalcards/list/" + hospitalCard.getPatient().getId();
     }
 
@@ -105,7 +101,7 @@ public class HospitalCardController {
         return "hospitalCardEditForm";
     }
 
-    @PostMapping(value = "/editsave")
+    @PostMapping(value = "/edit")
     public String editHospitalCard(@ModelAttribute("editedHospitalCard")
                                    HospitalCard hospitalCard, BindingResult result,
                                    Model model) {
